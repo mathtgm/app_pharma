@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class pageCadastro extends StatefulWidget {
   const pageCadastro({Key? key}) : super(key: key);
@@ -16,6 +17,8 @@ class _pageCadastroState extends State<pageCadastro> {
       mask: '###.###.###-##', filter: {"#": RegExp(r'[0-9]')});
   var maskCel = new MaskTextInputFormatter(
       mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +40,7 @@ class _pageCadastroState extends State<pageCadastro> {
               child: Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Form(
+                  key: _formKey,
                   child: Column(
                     children: <Widget>[
                       Container(
@@ -81,6 +85,12 @@ class _pageCadastroState extends State<pageCadastro> {
                                 ),
                               ),
                               labelText: "Nome"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty)
+                              return "Nome não preenchido";
+                            else
+                              return null;
+                          },
                         ),
                       ),
                       Padding(
@@ -93,6 +103,12 @@ class _pageCadastroState extends State<pageCadastro> {
                                 ),
                               ),
                               labelText: "E-mail"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty)
+                              return "E-mail não preenchido";
+                            else
+                              return null;
+                          },
                         ),
                       ),
                       Padding(
@@ -106,6 +122,12 @@ class _pageCadastroState extends State<pageCadastro> {
                                 ),
                               ),
                               labelText: "Senha"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty)
+                              return "Senha não preenchida";
+                            else
+                              return null;
+                          },
                         ),
                       ),
                       Padding(
@@ -113,13 +135,23 @@ class _pageCadastroState extends State<pageCadastro> {
                         child: TextFormField(
                           inputFormatters: [maskCPF],
                           decoration: InputDecoration(
-                              hintText: "123.456.789-90",
-                              focusedBorder: OutlineInputBorder(
+                            labelText: "CPF",
+                            hintText: "123.456.789-90",
+                            focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 49, 175, 180),
-                                ),
-                              ),
-                              labelText: "CPF"),
+                              color: Color.fromARGB(255, 49, 175, 180),
+                            )),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty)
+                              return "CPF não preenchido";
+                            else {
+                              if (CPFValidator.isValid(value))
+                                return null;
+                              else
+                                return "CPF Invalído";
+                            }
+                          },
                         ),
                       ),
                       Padding(
@@ -135,6 +167,12 @@ class _pageCadastroState extends State<pageCadastro> {
                               ),
                             ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty)
+                              return "Data de nascimento não preenchida";
+                            else
+                              return null;
+                          },
                         ),
                       ),
                       Padding(
@@ -150,12 +188,20 @@ class _pageCadastroState extends State<pageCadastro> {
                               ),
                             ),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty)
+                              return "Celular não preenchido";
+                            else
+                              return null;
+                          },
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _formKey.currentState!.validate();
+                          },
                           child: Container(
                             width: 300,
                             height: 50,
