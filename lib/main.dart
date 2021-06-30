@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pharma_app/views/PageCadastro.dart';
 
 void main() {
   runApp(MyApp());
@@ -97,38 +98,75 @@ class _MyHomePageState extends State<MyHomePage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                   child: Ink(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            Color.fromARGB(255, 49, 175, 180),
-                            Color.fromARGB(255, 67, 241, 247)
-                          ]),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Container(
-                          width: 300,
-                          height: 100,
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  'Entrar',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Icon(
-                                  Icons.play_arrow_rounded,
-                                  color: Colors.white,
-                                  size: 30,
-                                )
-                              ],
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: [
+                          Color.fromARGB(255, 49, 175, 180),
+                          Color.fromARGB(255, 67, 241, 247)
+                        ]),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Container(
+                      width: 300,
+                      height: 100,
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Entrar',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                          ))),
+                            Icon(
+                              Icons.play_arrow_rounded,
+                              color: Colors.white,
+                              size: 30,
+                            )
+                          ],
+                        ),
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
+            Container(
+              height: 50,
+              width: 300,
+              child: OutlinedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => pageCadastro()),
+                  );
+                },
+                style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    side: BorderSide(
+                      width: 1.0,
+                      color: Color.fromARGB(255, 49, 175, 180),
+                    )),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Cadastrar',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 49, 175, 180),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    Icon(
+                      Icons.article_outlined,
+                      color: Color.fromARGB(255, 49, 175, 180),
+                      size: 30,
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       )),
