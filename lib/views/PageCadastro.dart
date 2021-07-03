@@ -25,10 +25,6 @@ class _pageCadastroState extends State<pageCadastro> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 49, 175, 180),
       body: SafeArea(
-        top: true,
-        bottom: true,
-        left: true,
-        right: true,
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: Container(
