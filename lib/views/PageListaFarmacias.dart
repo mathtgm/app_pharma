@@ -39,51 +39,35 @@ class _listaFarmaciaState extends State<listaFarmacia> {
         shadowColor: Colors.transparent,
       ),
       body: SafeArea(
-        child: Container(
-          color: Color.fromARGB(255, 49, 175, 180),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Container(
-                height: 60,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50),
-                  ),
+              TextButton(
+                style: ButtonStyle(
+                  enableFeedback: false,
+                  overlayColor:
+                      MaterialStateProperty.all<Color>(Colors.blueGrey.shade50),
+                  padding:
+                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
                 ),
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.all(30),
-                  child: Column(
-                    children: <Widget>[
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
-                          ),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20)),
-                              child: Image.network(
-                                'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',
-                                width: 100,
-                                height: 100,
-                              ),
-                            ),
-                            Text("A\nb\nD")
-                          ],
-                        ),
-                      )
-                    ],
+                onPressed: () {},
+                child: Container(
+                  width: 100,
+                  height: 80,
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.network(
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvC3uyQRMfWgnxh2-C6SA5pTpJe3kvvXEQqQ&usqp=CAU"),
+                        Text("data")
+                      ],
+                    ),
                   ),
                 ),
               ),
