@@ -96,6 +96,7 @@ class formFarm extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     inputFormatters: [maskCNPJ],
                     decoration: InputDecoration(
                       labelText: "CNPJ",
@@ -137,8 +138,9 @@ class formFarm extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 30),
+                  padding: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: "Número",
                       focusedBorder: OutlineInputBorder(
@@ -156,7 +158,7 @@ class formFarm extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 30),
+                  padding: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
                     decoration: InputDecoration(
                       labelText: "Bairro",
@@ -175,7 +177,7 @@ class formFarm extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 30),
+                  padding: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
                     decoration: InputDecoration(
                       labelText: "Nome Farmaceutico resposável",
@@ -194,8 +196,9 @@ class formFarm extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 30),
+                  padding: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     inputFormatters: [maskCRF],
                     decoration: InputDecoration(
                       labelText: "CRF",
@@ -214,9 +217,10 @@ class formFarm extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 30),
+                  padding: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
                     inputFormatters: [maskCel],
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: "Telefone",
                       hintText: "(  )      -    ",

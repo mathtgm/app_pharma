@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pharma_app/views/FormUsuario.dart';
 import 'package:pharma_app/views/FormFarmacia.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class pageCadastro extends StatefulWidget {
   const pageCadastro({Key? key}) : super(key: key);
@@ -19,22 +20,40 @@ class _pageCadastroState extends State<pageCadastro> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 49, 175, 180),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+        child: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: PageView(
+                    controller: controller,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      formUser(),
+                      formFarm(),
+                    ],
+                  ),
+                ),
+              ),
             ),
-            child: PageView(
-              controller: controller,
-              scrollDirection: Axis.horizontal,
-              children: [
-                formUser(),
-                formFarm(),
-              ],
-            ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: SmoothPageIndicator(
+                  controller: controller, // PageController
+                  count: 2,
+                  effect: JumpingDotEffect(
+                    dotColor: Colors.white,
+                    paintStyle: PaintingStyle.stroke,
+                    activeDotColor: Colors.white,
+                  ), // your preferred effect
+                  onDotClicked: (index) {}),
+            )
+          ],
         ),
       ),
     );

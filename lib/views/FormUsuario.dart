@@ -93,6 +93,7 @@ class formUser extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     inputFormatters: [maskCPF],
                     decoration: InputDecoration(
                       labelText: "CPF",
@@ -117,6 +118,7 @@ class formUser extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     inputFormatters: [maskDate],
                     decoration: InputDecoration(
                       labelText: "Nascimento",
@@ -138,6 +140,7 @@ class formUser extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 30),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     inputFormatters: [maskCel],
                     decoration: InputDecoration(
                       labelText: "Celular",
