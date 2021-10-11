@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:pharma_app/controllers/http/http_farmacia_controller.dart';
+import 'package:pharma_app/models/modelFarmacia.dart';
 
-class listaFarmacia extends StatefulWidget {
-  const listaFarmacia({Key? key}) : super(key: key);
-
-  @override
-  _listaFarmaciaState createState() => _listaFarmaciaState();
-}
-
-class _listaFarmaciaState extends State<listaFarmacia> {
+class listaFarmaciaState extends GetView<HttpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,42 +34,18 @@ class _listaFarmaciaState extends State<listaFarmacia> {
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              TextButton(
-                style: ButtonStyle(
-                  enableFeedback: false,
-                  overlayColor:
-                      MaterialStateProperty.all<Color>(Colors.blueGrey.shade50),
-                  padding:
-                      MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
-                ),
-                onPressed: () {},
-                child: Container(
-                  width: 100,
-                  height: 80,
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.network(
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvC3uyQRMfWgnxh2-C6SA5pTpJe3kvvXEQqQ&usqp=CAU"),
-                        Text("data")
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+      body: controller.obx(
+        (state) {
+          return ListView.builder(
+            itemCount: state.length,
+            itemBuilder: (_, index) {
+              final Farmacia item = state[index];
+              return ListTile(
+                title: Text(item.nome_fantasia),
+              );
+            },
+          );
+        },
       ),
     );
   }
