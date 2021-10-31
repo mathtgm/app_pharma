@@ -8,12 +8,11 @@ class Farmacia {
   String endereco;
   String numero;
   String bairro;
-  String localidade;
   String data_cad;
   String cidade;
-  String uf;
-  String foto;
+  String estado;
   String nota;
+
   Farmacia({
     required this.id_farmacia,
     required this.nome_fantasia,
@@ -22,11 +21,9 @@ class Farmacia {
     required this.endereco,
     required this.numero,
     required this.bairro,
-    required this.localidade,
     required this.data_cad,
     required this.cidade,
-    required this.uf,
-    required this.foto,
+    required this.estado,
     required this.nota,
   });
 
@@ -38,11 +35,9 @@ class Farmacia {
     String? endereco,
     String? numero,
     String? bairro,
-    String? localidade,
     String? data_cad,
     String? cidade,
-    String? uf,
-    String? foto,
+    String? estado,
     String? nota,
   }) {
     return Farmacia(
@@ -53,11 +48,9 @@ class Farmacia {
       endereco: endereco ?? this.endereco,
       numero: numero ?? this.numero,
       bairro: bairro ?? this.bairro,
-      localidade: localidade ?? this.localidade,
       data_cad: data_cad ?? this.data_cad,
       cidade: cidade ?? this.cidade,
-      uf: uf ?? this.uf,
-      foto: foto ?? this.foto,
+      estado: estado ?? this.estado,
       nota: nota ?? this.nota,
     );
   }
@@ -71,11 +64,9 @@ class Farmacia {
       'endereco': endereco,
       'numero': numero,
       'bairro': bairro,
-      'localidade': localidade,
       'data_cad': data_cad,
       'cidade': cidade,
-      'uf': uf,
-      'foto': foto,
+      'estado': estado,
       'nota': nota,
     };
   }
@@ -89,11 +80,9 @@ class Farmacia {
       endereco: map['endereco'],
       numero: map['numero'],
       bairro: map['bairro'],
-      localidade: map['localidade'],
       data_cad: map['data_cad'],
       cidade: map['cidade'],
-      uf: map['uf'],
-      foto: map['foto'],
+      estado: map['estado'],
       nota: map['nota'],
     );
   }
@@ -105,7 +94,7 @@ class Farmacia {
 
   @override
   String toString() {
-    return 'Farmacia(id_farmacia: $id_farmacia, nome_fantasia: $nome_fantasia, cnpj: $cnpj, telefone: $telefone, endereco: $endereco, numero: $numero, bairro: $bairro, localidade: $localidade, data_cad: $data_cad, cidade: $cidade, uf: $uf, foto: $foto, nota: $nota)';
+    return 'Farmacia(id_farmacia: $id_farmacia, nome_fantasia: $nome_fantasia, cnpj: $cnpj, telefone: $telefone, endereco: $endereco, numero: $numero, bairro: $bairro, data_cad: $data_cad, cidade: $cidade, estado: $estado, nota: $nota)';
   }
 
   @override
@@ -120,11 +109,9 @@ class Farmacia {
         other.endereco == endereco &&
         other.numero == numero &&
         other.bairro == bairro &&
-        other.localidade == localidade &&
         other.data_cad == data_cad &&
         other.cidade == cidade &&
-        other.uf == uf &&
-        other.foto == foto &&
+        other.estado == estado &&
         other.nota == nota;
   }
 
@@ -137,11 +124,9 @@ class Farmacia {
         endereco.hashCode ^
         numero.hashCode ^
         bairro.hashCode ^
-        localidade.hashCode ^
         data_cad.hashCode ^
         cidade.hashCode ^
-        uf.hashCode ^
-        foto.hashCode ^
+        estado.hashCode ^
         nota.hashCode;
   }
 }

@@ -1,10 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:pharma_app/controllers/http/http_farmacia_controller.dart';
-import 'package:pharma_app/models/modelFarmacia.dart';
+import 'package:get/get.dart';
+import 'package:pharma_app/app/data/model/modelFarmacia.dart';
+import 'package:pharma_app/app/modules/listaFarmacia/listaFarmacias_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class listaFarmaciaState extends GetView<HttpController> {
+class listaFarmaciaState extends GetView<ListaController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,22 +38,99 @@ class listaFarmaciaState extends GetView<HttpController> {
         shadowColor: Colors.transparent,
       ),
       body: controller.obx(
-        (state) {
-          return ListView.builder(
-            itemCount: state.length,
-            itemBuilder: (_, index) {
-              final Farmacia item = state[index];
-              return ListTile(
-                title: Text(item.nome_fantasia),
-              );
-            },
-          );
-        },
+        (list) => ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            Farmacia farm = list[index];
+            return Card(
+              elevation: 5,
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(100))),
+                    child: Image.asset(
+                      'assets/StandartIcon.jpg',
+                      fit: BoxFit.cover,
+                      height: 100,
+                      width: 100,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          farm.nome_fantasia,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          farm.bairro,
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star_rounded,
+                              color: Colors.amber,
+                              size: 15,
+                            ),
+                            Text(
+                              farm.nota,
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontSize: 15,
+                              ),
+                            ),
+                            Text(
+                              ' • ',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.grey),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        ),
+        onError: (err) => Text(err!),
+        onEmpty: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/results-not-found.png",
+                height: 300,
+                width: 300,
+              ),
+              Text(
+                'Não encontramos nenhuma farmacia próxima',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 49, 175, 180)),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
 
   Widget _drawerInicio() {
+    final user = controller.getPreferences();
     return Drawer(
       child: Container(
         decoration: BoxDecoration(
@@ -91,7 +171,7 @@ class listaFarmaciaState extends GetView<HttpController> {
                             ),
                           ),
                           Text(
-                            "Matheus Mazarotto",
+                            'oi',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontSize: 18,
