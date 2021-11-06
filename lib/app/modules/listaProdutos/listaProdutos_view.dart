@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pharma_app/app/data/model/modelProduto.dart';
 import 'package:pharma_app/app/global/controller/global_controller.dart';
 import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_controller.dart';
+import 'package:pharma_app/app/routes/app_routes.dart';
 
 class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
   @override
@@ -39,6 +40,7 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
           children: [
             farmaciaCard(),
             botaoAjuda(),
+            Divider(),
             Expanded(
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -269,7 +271,10 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
             bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Get.toNamed(Routes.farmaceutico,
+              arguments: Get.arguments['id_farmacia']);
+        },
         child: Text(
           'Pedir ajuda',
           style: TextStyle(

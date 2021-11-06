@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: ^2.0.8
   geolocator: 7.6.2
   geocoding: ^2.0.1
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +62,8 @@ flutter:
     - assets/StandartIcon.jpg
     - assets/profile.png
     - assets/produto_default.png
+    - assets/pMale.png
+    - assets/pFemale.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

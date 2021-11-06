@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:pharma_app/app/data/model/modelFarmaceutico.dart';
+import 'package:pharma_app/app/modules/listaFarmaceutico/farmaceutico_binding.dart';
+import 'package:pharma_app/app/modules/listaFarmaceutico/farmaceutico_view.dart';
 import 'package:pharma_app/app/modules/listaFarmacia/ListaFarmacias_view.dart';
 import 'package:pharma_app/app/modules/listaFarmacia/listaFarmacias_binding.dart';
 import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_binding.dart';
@@ -12,6 +15,7 @@ class AppPages {
   static const INITIAL = Routes.INITIAL;
   static const listaFarmacias = Routes.farmaciaLista;
   static const listaProdutos = Routes.listaProdutos;
+  static const farmaceutico = Routes.farmaceutico;
 
   static final routes = [
     GetPage(
@@ -28,6 +32,11 @@ class AppPages {
       name: listaProdutos,
       page: () => ListaProdutosFarmacia(),
       binding: ListaProdutosBinding(),
+    ),
+    GetPage(
+      name: farmaceutico,
+      page: () => ListaFarmaceuticoFarmacia(),
+      binding: FarmaceuticoBinding(),
     )
   ];
 }
