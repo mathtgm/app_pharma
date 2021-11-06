@@ -3,7 +3,6 @@ import 'dart:convert';
 class Farmacia {
   int id_farmacia;
   String nome_fantasia;
-  String cnpj;
   String telefone;
   String endereco;
   String numero;
@@ -12,11 +11,16 @@ class Farmacia {
   String cidade;
   String estado;
   String nota;
+  double lat;
+  double long;
+  String? foto;
+  bool aberto;
+  String tempo;
+  String frete;
 
   Farmacia({
     required this.id_farmacia,
     required this.nome_fantasia,
-    required this.cnpj,
     required this.telefone,
     required this.endereco,
     required this.numero,
@@ -25,12 +29,17 @@ class Farmacia {
     required this.cidade,
     required this.estado,
     required this.nota,
+    required this.lat,
+    required this.long,
+    required this.foto,
+    required this.aberto,
+    required this.tempo,
+    required this.frete,
   });
 
   Farmacia copyWith({
     int? id_farmacia,
     String? nome_fantasia,
-    String? cnpj,
     String? telefone,
     String? endereco,
     String? numero,
@@ -39,11 +48,16 @@ class Farmacia {
     String? cidade,
     String? estado,
     String? nota,
+    double? lat,
+    double? long,
+    String? foto,
+    bool? aberto,
+    String? tempo,
+    String? frete,
   }) {
     return Farmacia(
       id_farmacia: id_farmacia ?? this.id_farmacia,
       nome_fantasia: nome_fantasia ?? this.nome_fantasia,
-      cnpj: cnpj ?? this.cnpj,
       telefone: telefone ?? this.telefone,
       endereco: endereco ?? this.endereco,
       numero: numero ?? this.numero,
@@ -52,6 +66,12 @@ class Farmacia {
       cidade: cidade ?? this.cidade,
       estado: estado ?? this.estado,
       nota: nota ?? this.nota,
+      lat: lat ?? this.lat,
+      long: long ?? this.long,
+      foto: foto ?? this.foto,
+      aberto: aberto ?? this.aberto,
+      tempo: tempo ?? this.tempo,
+      frete: frete ?? this.frete,
     );
   }
 
@@ -59,7 +79,6 @@ class Farmacia {
     return {
       'id_farmacia': id_farmacia,
       'nome_fantasia': nome_fantasia,
-      'cnpj': cnpj,
       'telefone': telefone,
       'endereco': endereco,
       'numero': numero,
@@ -68,6 +87,12 @@ class Farmacia {
       'cidade': cidade,
       'estado': estado,
       'nota': nota,
+      'lat': lat,
+      'long': long,
+      'foto': foto,
+      'aberto': aberto,
+      'tempo': tempo,
+      'frete': frete,
     };
   }
 
@@ -75,7 +100,6 @@ class Farmacia {
     return Farmacia(
       id_farmacia: map['id_farmacia'],
       nome_fantasia: map['nome_fantasia'],
-      cnpj: map['cnpj'],
       telefone: map['telefone'],
       endereco: map['endereco'],
       numero: map['numero'],
@@ -84,6 +108,12 @@ class Farmacia {
       cidade: map['cidade'],
       estado: map['estado'],
       nota: map['nota'],
+      lat: map['lat'],
+      long: map['long'],
+      foto: map['foto'] != null ? map['foto'] : null,
+      aberto: map['aberto'],
+      tempo: map['tempo'],
+      frete: map['frete'],
     );
   }
 
@@ -94,7 +124,7 @@ class Farmacia {
 
   @override
   String toString() {
-    return 'Farmacia(id_farmacia: $id_farmacia, nome_fantasia: $nome_fantasia, cnpj: $cnpj, telefone: $telefone, endereco: $endereco, numero: $numero, bairro: $bairro, data_cad: $data_cad, cidade: $cidade, estado: $estado, nota: $nota)';
+    return 'Farmacia(id_farmacia: $id_farmacia, nome_fantasia: $nome_fantasia, telefone: $telefone, endereco: $endereco, numero: $numero, bairro: $bairro, data_cad: $data_cad, cidade: $cidade, estado: $estado, nota: $nota, lat: $lat, long: $long, foto: $foto, aberto: $aberto, tempo: $tempo, frete: $frete)';
   }
 
   @override
@@ -104,7 +134,6 @@ class Farmacia {
     return other is Farmacia &&
         other.id_farmacia == id_farmacia &&
         other.nome_fantasia == nome_fantasia &&
-        other.cnpj == cnpj &&
         other.telefone == telefone &&
         other.endereco == endereco &&
         other.numero == numero &&
@@ -112,14 +141,19 @@ class Farmacia {
         other.data_cad == data_cad &&
         other.cidade == cidade &&
         other.estado == estado &&
-        other.nota == nota;
+        other.nota == nota &&
+        other.lat == lat &&
+        other.long == long &&
+        other.foto == foto &&
+        other.aberto == aberto &&
+        other.tempo == tempo &&
+        other.frete == frete;
   }
 
   @override
   int get hashCode {
     return id_farmacia.hashCode ^
         nome_fantasia.hashCode ^
-        cnpj.hashCode ^
         telefone.hashCode ^
         endereco.hashCode ^
         numero.hashCode ^
@@ -127,6 +161,12 @@ class Farmacia {
         data_cad.hashCode ^
         cidade.hashCode ^
         estado.hashCode ^
-        nota.hashCode;
+        nota.hashCode ^
+        lat.hashCode ^
+        long.hashCode ^
+        foto.hashCode ^
+        aberto.hashCode ^
+        tempo.hashCode ^
+        frete.hashCode;
   }
 }

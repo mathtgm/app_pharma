@@ -36,6 +36,8 @@ dependencies:
   get: ^4.3.8
   crypto: ^3.0.1
   shared_preferences: ^2.0.8
+  geolocator: 7.6.2
+  geocoding: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -55,7 +57,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/results-not-found.png
+    - assets/StandartIcon.png
     - assets/StandartIcon.jpg
+    - assets/profile.png
+    - assets/produto_default.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

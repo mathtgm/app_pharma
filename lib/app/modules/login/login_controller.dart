@@ -20,8 +20,8 @@ class LoginController extends GetxController {
     final res = await repository.autenticarUsuario(email.text, senha.text);
     if (res.first['erro'] != null) {
       Get.defaultDialog(
-        title: "Falha ao autenticar",
-        middleText: "Usuário ou senha incorretos",
+        title: "Falha ao autenticar Erro: ${res.first['erro']}",
+        middleText: res.first['msg'],
         backgroundColor: Color.fromARGB(255, 49, 175, 180),
         titleStyle: TextStyle(color: Colors.white),
         middleTextStyle: TextStyle(color: Colors.white),
@@ -30,8 +30,6 @@ class LoginController extends GetxController {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('name', res.first['nome']);
       await prefs.setInt('id', res.first['id_usuario']);
-      print(prefs.get('id'));
-      print(prefs.get('name'));
       Get.offAllNamed(Routes.farmaciaLista);
     }
   }
