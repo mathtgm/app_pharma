@@ -10,13 +10,17 @@ class ListaApiClient extends GetConnect {
       'cidade': cidadeHTTP,
       'estado': estadoHTTP
     };
-    var response = await http.post(Uri.parse(database.site + 'farmacias'),
-        body: requestHeaders);
+    try {
+      var response = await http.post(Uri.parse(database.site + 'farmacias'),
+          body: requestHeaders);
 
-    if (response.statusCode == 200) {
-      return response.body;
-    } else {
-      return ('');
+      if (response.statusCode == 200) {
+        return response.body;
+      } else {
+        return ('');
+      }
+    } catch (TimeoutConnection) {
+      throw 'Servidor não encontrado, verifique a conexão com a internet';
     }
   }
 }

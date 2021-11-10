@@ -23,12 +23,9 @@ class ListaController extends GetxController with StateMixin {
     String estado = await location.getEstado(posUser);
     await repository.listaFarmacias(cidade, estado).then((value) {
       change(value, status: RxStatus.success());
+      if (value == '') change(value, status: RxStatus.empty());
     }).catchError((err) {
-      print(err);
-      if (value == null)
-        change(value, status: RxStatus.empty());
-      else
-        change(null, status: RxStatus.error('Erro ao receber os dados.'));
+      change(err, status: RxStatus.error(err));
     });
     getPreferences();
   }

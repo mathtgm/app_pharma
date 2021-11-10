@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharma_app/app/data/model/modelFarmacia.dart';
+import 'package:pharma_app/app/global/widgets/msgErro.dart';
 import 'package:pharma_app/app/modules/listaFarmacia/listaFarmacias_controller.dart';
 import 'package:pharma_app/app/routes/app_routes.dart';
 
@@ -37,137 +38,121 @@ class listaFarmaciaState extends GetView<ListaController> {
         backgroundColor: Colors.white,
       ),
       body: controller.obx(
-        (list) => ListView.builder(
-          itemCount: list.length,
-          padding: EdgeInsets.only(top: 20),
-          itemBuilder: (context, index) {
-            Farmacia farm = list[index];
-            return Card(
-              color: farm.aberto
-                  ? Color.fromARGB(255, 240, 254, 254)
-                  : Color.fromARGB(255, 240, 243, 255),
-              shadowColor:
-                  farm.aberto ? Color.fromARGB(255, 49, 175, 180) : Colors.red,
-              elevation: 5,
-              child: InkWell(
-                onTap: () {
-                  farm.aberto
-                      ? Get.toNamed(Routes.listaProdutos,
-                          arguments: farm.toMap())
-                      : null;
-                },
-                child: Row(
-                  children: [
-                    Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100))),
-                        child: farm.foto == null
-                            ? Image.asset(
-                                'assets/StandartIcon.png',
-                                fit: BoxFit.cover,
-                                height: 100,
-                                width: 100,
-                              )
-                            : Image.network(
-                                farm.foto!,
-                                fit: BoxFit.cover,
-                                height: 100,
-                                width: 100,
-                              )),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+          (list) => ListView.builder(
+                itemCount: list.length,
+                padding: EdgeInsets.only(top: 20),
+                itemBuilder: (context, index) {
+                  Farmacia farm = list[index];
+                  return Card(
+                    color: farm.aberto
+                        ? Color.fromARGB(255, 240, 254, 254)
+                        : Color.fromARGB(255, 240, 243, 255),
+                    shadowColor: farm.aberto
+                        ? Color.fromARGB(255, 49, 175, 180)
+                        : Colors.red,
+                    elevation: 5,
+                    child: InkWell(
+                      onTap: () {
+                        farm.aberto
+                            ? Get.toNamed(Routes.listaProdutos,
+                                arguments: farm.toMap())
+                            : null;
+                      },
+                      child: Row(
                         children: [
-                          Text(
-                            farm.nome_fantasia,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            farm.bairro,
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star_rounded,
-                                color: Colors.amber,
-                                size: 15,
-                              ),
-                              Text(
-                                farm.nota,
-                                style: TextStyle(
-                                  color: Colors.amber,
-                                  fontSize: 15,
-                                ),
-                              ),
-                              Text(
-                                ' • ',
-                                style:
-                                    TextStyle(fontSize: 20, color: Colors.grey),
-                              ),
-                              Text(
-                                (controller.location.getDistancia(
-                                                controller.distUser.latitude,
-                                                controller.distUser.longitude,
-                                                farm.lat,
-                                                farm.long) /
-                                            1000)
-                                        .toPrecision(1)
-                                        .toString() +
-                                    ' Km',
-                                style:
-                                    TextStyle(fontSize: 15, color: Colors.grey),
-                              ),
-                              Text(
-                                ' • ',
-                                style:
-                                    TextStyle(fontSize: 20, color: Colors.grey),
-                              ),
-                              Text(farm.aberto ? 'ABERTO' : 'FECHADO',
+                          Container(
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100))),
+                              child: farm.foto == null
+                                  ? Image.asset(
+                                      'assets/StandartIcon.png',
+                                      fit: BoxFit.cover,
+                                      height: 100,
+                                      width: 100,
+                                    )
+                                  : Image.network(
+                                      farm.foto!,
+                                      fit: BoxFit.cover,
+                                      height: 100,
+                                      width: 100,
+                                    )),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  farm.nome_fantasia,
                                   style: TextStyle(
-                                      fontSize: 15,
-                                      color: farm.aberto
-                                          ? Colors.greenAccent
-                                          : Colors.redAccent))
-                            ],
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  farm.bairro,
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.grey),
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_rounded,
+                                      color: Colors.amber,
+                                      size: 15,
+                                    ),
+                                    Text(
+                                      farm.nota,
+                                      style: TextStyle(
+                                        color: Colors.amber,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Text(
+                                      ' • ',
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.grey),
+                                    ),
+                                    Text(
+                                      (controller.location.getDistancia(
+                                                      controller
+                                                          .distUser.latitude,
+                                                      controller
+                                                          .distUser.longitude,
+                                                      farm.lat,
+                                                      farm.long) /
+                                                  1000)
+                                              .toPrecision(1)
+                                              .toString() +
+                                          ' Km',
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.grey),
+                                    ),
+                                    Text(
+                                      ' • ',
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.grey),
+                                    ),
+                                    Text(farm.aberto ? 'ABERTO' : 'FECHADO',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: farm.aberto
+                                                ? Colors.greenAccent
+                                                : Colors.redAccent))
+                                  ],
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-        onError: (err) => Text(err!),
-        onEmpty: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/results-not-found.png",
-                height: 300,
-                width: 300,
-              ),
-              Text(
-                'Não encontramos nenhuma farmacia próxima',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 49, 175, 180)),
-              )
-            ],
-          ),
-        ),
-      ),
+          onError: (err) => msgErro().telaErro(err!),
+          onEmpty: msgErro().telaErro('Não foi encontrado farmacias perto')),
     );
   }
 

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:pharma_app/app/data/model/modelProduto.dart';
-import 'package:pharma_app/app/global/controller/global_controller.dart';
 import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_controller.dart';
 import 'package:pharma_app/app/routes/app_routes.dart';
 
@@ -10,6 +8,11 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Text('Ver carrinho'),
+        icon: Icon(Icons.shopping_cart_rounded),
+      ),
       appBar: AppBar(
         leading: Builder(
           builder: (context) {
@@ -51,11 +54,15 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
                   return Container(
                     margin: EdgeInsets.all(5),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(Routes.produto, arguments: prod.toMap());
+                      },
                       child: Stack(
                         children: [
                           prodCardContent(prod),
-                          prodImage(prod.imagem)
+                          Hero(
+                              tag: prod.id_produto,
+                              child: prodImage(prod.imagem))
                         ],
                       ),
                     ),
@@ -187,7 +194,7 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
           width: 80,
           child: Get.arguments['foto'] == null
               ? Image.asset(
-                  'assets/StandartIcon.jpg',
+                  'assets/StandartIcon.png',
                   fit: BoxFit.cover,
                 )
               : Image.network(
@@ -262,23 +269,26 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
 
   Widget botaoAjuda() {
     return Container(
-      width: Get.width,
-      height: 30,
+      height: 35,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 49, 175, 180),
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
       ),
-      child: InkWell(
-        onTap: () {
+      child: TextButton(
+        onPressed: () {
           Get.toNamed(Routes.farmaceutico,
               arguments: Get.arguments['id_farmacia']);
         },
-        child: Text(
-          'Pedir ajuda',
-          style: TextStyle(
-              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+        child: SizedBox(
+          width: Get.width,
+          child: Text(
+            'Pedir ajuda',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );

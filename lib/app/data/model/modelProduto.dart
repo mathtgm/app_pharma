@@ -4,33 +4,33 @@ class Produto {
   int id_produto;
   String nome;
   String? descricao;
-  String tipo_produto;
   String preco_unid;
   String? imagem;
+  int id_farmacia;
   Produto({
     required this.id_produto,
     required this.nome,
     required this.descricao,
-    required this.tipo_produto,
     required this.preco_unid,
     required this.imagem,
+    required this.id_farmacia,
   });
 
   Produto copyWith({
     int? id_produto,
     String? nome,
     String? descricao,
-    String? tipo_produto,
     String? preco_unid,
     String? imagem,
+    int? id_farmacia,
   }) {
     return Produto(
       id_produto: id_produto ?? this.id_produto,
       nome: nome ?? this.nome,
       descricao: descricao ?? this.descricao,
-      tipo_produto: tipo_produto ?? this.tipo_produto,
       preco_unid: preco_unid ?? this.preco_unid,
       imagem: imagem ?? this.imagem,
+      id_farmacia: id_farmacia ?? this.id_farmacia,
     );
   }
 
@@ -39,9 +39,9 @@ class Produto {
       'id_produto': id_produto,
       'nome': nome,
       'descricao': descricao,
-      'tipo_produto': tipo_produto,
       'preco_unid': preco_unid,
       'imagem': imagem,
+      'id_farmacia': id_farmacia,
     };
   }
 
@@ -50,9 +50,9 @@ class Produto {
       id_produto: map['id_produto'],
       nome: map['nome'],
       descricao: map['descricao'] != null ? map['descricao'] : null,
-      tipo_produto: map['tipo_produto'],
       preco_unid: map['preco_unid'],
       imagem: map['imagem'] != null ? map['imagem'] : null,
+      id_farmacia: map['id_farmacia'],
     );
   }
 
@@ -63,7 +63,7 @@ class Produto {
 
   @override
   String toString() {
-    return 'Produto(id_produto: $id_produto, nome: $nome, descricao: $descricao, tipo_produto: $tipo_produto, preco_unid: $preco_unid, imagem: $imagem)';
+    return 'Produto(id_produto: $id_produto, nome: $nome, descricao: $descricao, preco_unid: $preco_unid, imagem: $imagem, id_farmacia: $id_farmacia)';
   }
 
   @override
@@ -74,9 +74,9 @@ class Produto {
         other.id_produto == id_produto &&
         other.nome == nome &&
         other.descricao == descricao &&
-        other.tipo_produto == tipo_produto &&
         other.preco_unid == preco_unid &&
-        other.imagem == imagem;
+        other.imagem == imagem &&
+        other.id_farmacia == id_farmacia;
   }
 
   @override
@@ -84,8 +84,8 @@ class Produto {
     return id_produto.hashCode ^
         nome.hashCode ^
         descricao.hashCode ^
-        tipo_produto.hashCode ^
         preco_unid.hashCode ^
-        imagem.hashCode;
+        imagem.hashCode ^
+        id_farmacia.hashCode;
   }
 }

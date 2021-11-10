@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharma_app/app/data/model/modelUser.dart';
 import 'package:pharma_app/app/data/repository/login_repository.dart';
-import 'package:pharma_app/app/modules/listaFarmacia/ListaFarmacias_view.dart';
 import 'package:pharma_app/app/routes/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,6 +14,17 @@ class LoginController extends GetxController {
 
   TextEditingController email = TextEditingController();
   TextEditingController senha = TextEditingController();
+
+  @override
+  void onInit() async {
+    super.onInit();
+    print('Estou iniciando');
+    await SharedPreferences.getInstance().then((value) {
+      if ((value.get('name') != null) && (value.get('id') != null)) {
+        Get.offAllNamed(Routes.farmaciaLista);
+      }
+    });
+  }
 
   void login() async {
     final res = await repository.autenticarUsuario(email.text, senha.text);
