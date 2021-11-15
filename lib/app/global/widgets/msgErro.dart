@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class msgErro {
-  Widget telaErro(String mensagem) {
+  Widget telaErro(String mensagem, String image) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            "assets/results-not-found.png",
+            image,
             height: 300,
             width: 300,
           ),

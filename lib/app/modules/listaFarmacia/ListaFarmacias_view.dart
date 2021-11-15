@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharma_app/app/data/model/modelFarmacia.dart';
+import 'package:pharma_app/app/global/widgets/images.dart';
 import 'package:pharma_app/app/global/widgets/msgErro.dart';
 import 'package:pharma_app/app/modules/listaFarmacia/listaFarmacias_controller.dart';
 import 'package:pharma_app/app/routes/app_routes.dart';
@@ -151,8 +152,10 @@ class listaFarmaciaState extends GetView<ListaController> {
                   );
                 },
               ),
-          onError: (err) => msgErro().telaErro(err!),
-          onEmpty: msgErro().telaErro('Não foi encontrado farmacias perto')),
+          onError: (err) =>
+              msgErro().telaErro(err!, ImagensTela.imgErroConexao),
+          onEmpty: msgErro().telaErro('Não foi encontrado farmacias perto',
+              ImagensTela.imgSemRegistroLoc)),
     );
   }
 
@@ -243,38 +246,46 @@ class listaFarmaciaState extends GetView<ListaController> {
               ),
               child: Column(
                 children: <Widget>[
-                  ListTile(
-                    title: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.checklist_sharp,
-                          size: 25,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 15.0),
-                          child: Text(
-                            "Lista de pedidos",
-                            style: TextStyle(fontSize: 18),
+                  InkWell(
+                    onTap: () {},
+                    child: ListTile(
+                      title: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.checklist_sharp,
+                            size: 25,
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: EdgeInsets.only(left: 15.0),
+                            child: Text(
+                              "Lista de pedidos",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  ListTile(
-                    title: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.pin_drop_outlined,
-                          size: 25,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 15.0),
-                          child: Text(
-                            "Endereços",
-                            style: TextStyle(fontSize: 18),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.endereco);
+                    },
+                    child: ListTile(
+                      title: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.pin_drop_outlined,
+                            size: 25,
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: EdgeInsets.only(left: 15.0),
+                            child: Text(
+                              "Endereços",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

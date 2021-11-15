@@ -6,14 +6,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProdutoController extends GetxController with StateMixin {
   RxInt quantProduto = 1.obs;
-  RxDouble total = 0.00.obs;
+  RxDouble total = double.parse(Get.arguments['preco_unid']).obs;
   CarrinhoProdutoRepository rep = CarrinhoProdutoRepository();
 
   void addProdutoCarrinho(Map produto) async {
     if (quantProduto > 0) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      rep.addProduto(quantProduto.toInt(), total.toDouble(),
-          prefs.getInt('id')!, produto['id_farmacia'], produto['id_produto']);
+      rep.addProduto(
+          quantProduto.toInt(),
+          total.toDouble(),
+          prefs.getInt('id')!,
+          produto['id_farmacia'],
+          produto['id_produto'],
+          produto['nome']);
       Get.rawSnackbar(
         animationDuration: Duration(seconds: 3),
         snackPosition: SnackPosition.BOTTOM,

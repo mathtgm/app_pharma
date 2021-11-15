@@ -5,6 +5,7 @@ class ProdutoCarrinho {
   int quantidade;
   double valor_total;
   int id_produto;
+  String nomeProd;
   int id_farmacia;
   int id_usuario;
   ProdutoCarrinho({
@@ -12,6 +13,7 @@ class ProdutoCarrinho {
     required this.quantidade,
     required this.valor_total,
     required this.id_produto,
+    required this.nomeProd,
     required this.id_farmacia,
     required this.id_usuario,
   });
@@ -21,6 +23,7 @@ class ProdutoCarrinho {
     int? quantidade,
     double? valor_total,
     int? id_produto,
+    String? nomeProd,
     int? id_farmacia,
     int? id_usuario,
   }) {
@@ -29,6 +32,7 @@ class ProdutoCarrinho {
       quantidade: quantidade ?? this.quantidade,
       valor_total: valor_total ?? this.valor_total,
       id_produto: id_produto ?? this.id_produto,
+      nomeProd: nomeProd ?? this.nomeProd,
       id_farmacia: id_farmacia ?? this.id_farmacia,
       id_usuario: id_usuario ?? this.id_usuario,
     );
@@ -40,6 +44,7 @@ class ProdutoCarrinho {
       'quantidade': quantidade,
       'valor_total': valor_total,
       'id_produto': id_produto,
+      'nomeProd': nomeProd,
       'id_farmacia': id_farmacia,
       'id_usuario': id_usuario,
     };
@@ -47,10 +52,11 @@ class ProdutoCarrinho {
 
   factory ProdutoCarrinho.fromMap(Map<dynamic, dynamic> map) {
     return ProdutoCarrinho(
-      id_pedido: map['id_pedido'],
+      id_pedido: map['id_pedido'] != null ? map['id_pedido'] : null,
       quantidade: map['quantidade'],
       valor_total: map['valor_total'],
       id_produto: map['id_produto'],
+      nomeProd: map['nomeProd'],
       id_farmacia: map['id_farmacia'],
       id_usuario: map['id_usuario'],
     );
@@ -63,7 +69,7 @@ class ProdutoCarrinho {
 
   @override
   String toString() {
-    return 'ProdutoCarrinho(id_pedido: $id_pedido, quantidade: $quantidade, valor_total: $valor_total, id_produto: $id_produto, id_farmacia: $id_farmacia, id_usuario: $id_usuario)';
+    return 'ProdutoCarrinho(id_pedido: $id_pedido, quantidade: $quantidade, valor_total: $valor_total, id_produto: $id_produto, nomeProd: $nomeProd, id_farmacia: $id_farmacia, id_usuario: $id_usuario)';
   }
 
   @override
@@ -75,6 +81,7 @@ class ProdutoCarrinho {
         other.quantidade == quantidade &&
         other.valor_total == valor_total &&
         other.id_produto == id_produto &&
+        other.nomeProd == nomeProd &&
         other.id_farmacia == id_farmacia &&
         other.id_usuario == id_usuario;
   }
@@ -85,6 +92,7 @@ class ProdutoCarrinho {
         quantidade.hashCode ^
         valor_total.hashCode ^
         id_produto.hashCode ^
+        nomeProd.hashCode ^
         id_farmacia.hashCode ^
         id_usuario.hashCode;
   }

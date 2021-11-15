@@ -9,7 +9,9 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed(Routes.carrinho);
+        },
         label: Text('Ver carrinho'),
         icon: Icon(Icons.shopping_cart_rounded),
       ),

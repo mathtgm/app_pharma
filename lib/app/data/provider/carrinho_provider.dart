@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:get/get.dart';
 
 class ProdutoCarrinhoApi extends GetConnect {
-  static final _databaseName = 'dbPharmApp.db';
+  static final _databaseName = 'dbCarrinho.db';
   static final _databaseVersion = 1;
 
   static final table = 'carrinho';
@@ -16,6 +16,7 @@ class ProdutoCarrinhoApi extends GetConnect {
   static final idUsuario = 'id_usuario';
   static final quantidade = 'quantidade';
   static final total = 'valor_total';
+  static final nomeProduto = 'nomeProd';
 
   late Database db;
 
@@ -33,7 +34,8 @@ class ProdutoCarrinhoApi extends GetConnect {
           $idFarmacia interger not null,
           $idUsuario integer not null,
           $quantidade interger not null,
-          $total decimal(7,2) not null
+          $total real not null,
+          $nomeProduto varchar not null
         )''');
     });
   }
@@ -45,16 +47,38 @@ class ProdutoCarrinhoApi extends GetConnect {
       'carrinho',
       produtoCarrinho.toMap(),
     );
+    db.close();
+  }
+
+  Future<void> atualizarProduto(ProdutoCarrinho pedido) async {
+    await open();
+
+    await db.update(table, pedido.toMap(),
+        where: 'id_produto == ?', whereArgs: [pedido.id_produto]);
+
+    db.close();
   }
 
   getCarrinho() async {
+    await open();
+
     List<Map> maps = await db.query(
-      'carrinho',
-      columns: [idPedido, idFarmacia, idProduto, idUsuario, quantidade, total],
+      table,
+      columns: [
+        idPedido,
+        idFarmacia,
+        idProduto,
+        idUsuario,
+        quantidade,
+        total,
+        nomeProduto
+      ],
     );
     if (maps.length > 0) {
+      db.close();
       return maps;
     }
+    db.close();
     return '';
   }
 }
