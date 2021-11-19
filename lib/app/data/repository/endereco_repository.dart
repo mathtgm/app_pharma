@@ -18,15 +18,19 @@ class EnderecoRepository {
     }
   }
 
-  setEndereco(Endereco end) async {
+  void setEndereco(Endereco end) async {
     await api.addEndereco(end);
   }
 
-  updateEndereco(Endereco endereco) async {
+  void updateEndereco(Endereco endereco) async {
     await api.updateEndereco(endereco.toMap());
   }
 
-  deleteEndereco(int idEndereco) async {
+  void deleteEndereco(int idEndereco) async {
     await api.deleteEndereco(idEndereco);
+  }
+
+  void esvaziarEndereco() async {
+    api.esvaziarEndereco();
   }
 }

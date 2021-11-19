@@ -4,7 +4,7 @@ import 'package:pharma_app/app/data/provider/carrinho_provider.dart';
 class CarrinhoProdutoRepository {
   final ProdutoCarrinhoApi api = ProdutoCarrinhoApi();
 
-  void addProduto(int quantProduto, double total, int id_usuario,
+  void addProduto(int quantProduto, double total, String descricao,
       int id_farmacia, int id_produto, String nomeProd) async {
     bool prodIgual = false;
     List<ProdutoCarrinho> list = [];
@@ -13,7 +13,7 @@ class CarrinhoProdutoRepository {
         valor_total: total,
         id_produto: id_produto,
         id_farmacia: id_farmacia,
-        id_usuario: id_usuario,
+        descricao: descricao,
         nomeProd: nomeProd);
 
     list = await getCarrinho();
@@ -29,6 +29,14 @@ class CarrinhoProdutoRepository {
     if (prodIgual == false) api.addProdutoCarrinho(pedido);
   }
 
+  atualizarProduto(ProdutoCarrinho prod) {
+    api.atualizarProduto(prod);
+  }
+
+  void esvaziarCarrinho() {
+    api.esvaziarCarrinho();
+  }
+
   getCarrinho() async {
     var res = await api.getCarrinho();
     List<ProdutoCarrinho> list = [];
@@ -38,5 +46,9 @@ class CarrinhoProdutoRepository {
       });
     }
     return list;
+  }
+
+  removerProduto(int prod) async {
+    await api.removerProduto(prod);
   }
 }

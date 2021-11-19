@@ -10,7 +10,7 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Get.toNamed(Routes.carrinho);
+          Get.toNamed(Routes.carrinho, arguments: Get.arguments);
         },
         label: Text('Ver carrinho'),
         icon: Icon(Icons.shopping_cart_rounded),

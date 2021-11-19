@@ -22,4 +22,20 @@ class LoginApiClient extends GetConnect {
       return ('[{"erro": "408", "msg" : "Conexão com o servidor expirou"}]');
     }
   }
+
+  Future<String> autenticarFarmacia(String usuario, String senha) async {
+    try {
+      var response = await http.post(Uri.parse(database.site + 'farmaciaLogin'),
+          headers: {
+            "email": usuario,
+            "senha": md5.convert(utf8.encode(senha)).toString()
+          });
+      if (response.statusCode == 200)
+        return response.body;
+      else
+        return ('[{"erro": "${response.statusCode}", "msg" : "Usuario/Senha incorretos"}]');
+    } catch (TimeoutException) {
+      throw ('[{"erro": "408", "msg" : "Conexão com o servidor expirou"}]');
+    }
+  }
 }

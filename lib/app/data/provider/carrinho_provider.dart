@@ -10,10 +10,9 @@ class ProdutoCarrinhoApi extends GetConnect {
 
   static final table = 'carrinho';
 
-  static final idPedido = 'id_pedido';
   static final idProduto = 'id_produto';
   static final idFarmacia = 'id_farmacia';
-  static final idUsuario = 'id_usuario';
+  static final descricao = 'descricao';
   static final quantidade = 'quantidade';
   static final total = 'valor_total';
   static final nomeProduto = 'nomeProd';
@@ -29,10 +28,9 @@ class ProdutoCarrinhoApi extends GetConnect {
         onCreate: (Database db, int version) async {
       await db.execute('''
         create table $table ( 
-          $idPedido integer not null,
           $idProduto integer not null, 
           $idFarmacia interger not null,
-          $idUsuario integer not null,
+          $descricao varchar not null,
           $quantidade interger not null,
           $total real not null,
           $nomeProduto varchar not null
@@ -65,10 +63,9 @@ class ProdutoCarrinhoApi extends GetConnect {
     List<Map> maps = await db.query(
       table,
       columns: [
-        idPedido,
         idFarmacia,
         idProduto,
-        idUsuario,
+        descricao,
         quantidade,
         total,
         nomeProduto
@@ -80,5 +77,19 @@ class ProdutoCarrinhoApi extends GetConnect {
     }
     db.close();
     return '';
+  }
+
+  Future<void> removerProduto(int prod) async {
+    await open();
+
+    await db.delete(table, where: 'id_produto == ?', whereArgs: [prod]);
+
+    db.close();
+  }
+
+  Future<void> esvaziarCarrinho() async {
+    await open();
+    db.execute('DELETE FROM $table;');
+    db.close();
   }
 }

@@ -11,4 +11,10 @@ class LoginUserRepository {
     final responseMap = jsonDecode(json);
     return responseMap;
   }
+
+  autenticarFarmacia(String usuario, String senha) async {
+    final json = await apiClient.autenticarFarmacia(usuario, senha);
+    final responseMap = jsonDecode(json);
+    return responseMap;
+  }
 }

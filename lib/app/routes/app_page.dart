@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 import 'package:pharma_app/app/modules/carrinho/carrinho_binding.dart';
 import 'package:pharma_app/app/modules/carrinho/carrinho_view.dart';
+import 'package:pharma_app/app/modules/detalhePeedidoUsuario/detalhePedidoUsuario_binding.dart';
+import 'package:pharma_app/app/modules/detalhePeedidoUsuario/detalhePedidoUsuario_view.dart';
+import 'package:pharma_app/app/modules/farmaciaMenu/farmaciaMenu_binding.dart';
+import 'package:pharma_app/app/modules/farmaciaMenu/farmaciaMenu_view.dart';
 import 'package:pharma_app/app/modules/formEndereco/formEndereco_binding.dart';
 import 'package:pharma_app/app/modules/formEndereco/formEndereco_view.dart';
 import 'package:pharma_app/app/modules/listaEnderecos/endereco_binding.dart';
@@ -9,12 +13,16 @@ import 'package:pharma_app/app/modules/listaFarmaceutico/farmaceutico_binding.da
 import 'package:pharma_app/app/modules/listaFarmaceutico/farmaceutico_view.dart';
 import 'package:pharma_app/app/modules/listaFarmacia/ListaFarmacias_view.dart';
 import 'package:pharma_app/app/modules/listaFarmacia/listaFarmacias_binding.dart';
+import 'package:pharma_app/app/modules/listaPedidoUsuario/listaPedidoUsuario_binding.dart';
+import 'package:pharma_app/app/modules/listaPedidoUsuario/listaPedidoUsuario_view.dart';
 import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_binding.dart';
 import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_view.dart';
 import 'package:pharma_app/app/modules/login/login_binding.dart';
 import 'package:pharma_app/app/modules/login/login_view.dart';
 import 'package:pharma_app/app/modules/produto/produto_binding.dart';
 import 'package:pharma_app/app/modules/produto/produto_view.dart';
+import 'package:pharma_app/app/modules/produtoCarrinho/produtoCarrinho_binding.dart';
+import 'package:pharma_app/app/modules/produtoCarrinho/produtoCarrinho_view.dart';
 
 import 'app_routes.dart';
 
@@ -55,6 +63,22 @@ class AppPages {
     GetPage(
         name: Routes.formEndereco,
         page: () => FormEndereco(),
-        binding: FormEnderecoBinding())
+        binding: FormEnderecoBinding()),
+    GetPage(
+        name: Routes.menuFarmacia,
+        page: () => FarmaciaMenu(),
+        binding: MenuFarmaciaBinding()),
+    GetPage(
+        name: Routes.carrinhoProduto,
+        page: () => ProdutoCarrinho(),
+        binding: ProdutoCarrinhoBinding()),
+    GetPage(
+        name: Routes.listaPedidosUsuario,
+        page: () => ListaPedidoUsuario(),
+        binding: ListaPedidoUsuarioBinding()),
+    GetPage(
+        name: Routes.detalhePedidosUsuario,
+        page: () => DetalhePedidoUsuario(),
+        binding: DetalhePedidoUsuarioBinding())
   ];
 }

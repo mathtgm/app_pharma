@@ -247,7 +247,9 @@ class listaFarmaciaState extends GetView<ListaController> {
               child: Column(
                 children: <Widget>[
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.listaPedidosUsuario);
+                    },
                     child: ListTile(
                       title: Row(
                         children: <Widget>[
@@ -281,6 +283,28 @@ class listaFarmaciaState extends GetView<ListaController> {
                             padding: EdgeInsets.only(left: 15.0),
                             child: Text(
                               "Endereços",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      controller.sairAplicativo();
+                    },
+                    child: ListTile(
+                      title: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.close_outlined,
+                            size: 25,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 15.0),
+                            child: Text(
+                              "Encerrar sessão",
                               style: TextStyle(fontSize: 18),
                             ),
                           ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharma_app/app/global/widgets/logo.dart';
 import 'package:pharma_app/app/modules/login/login_controller.dart';
+import 'package:pharma_app/app/routes/app_routes.dart';
 
 class LoginPage extends GetView<LoginController> {
   @override
@@ -146,6 +147,25 @@ class LoginPage extends GetView<LoginController> {
                               size: 30,
                             )
                           ],
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (Get.arguments == null)
+                          Get.offAllNamed(Routes.INITIAL,
+                              arguments: 'farmacia');
+                        else
+                          Get.offAllNamed(Routes.INITIAL);
+                      },
+                      child: Text(
+                        Get.arguments == 'farmacia'
+                            ? 'Entrar como usuário'
+                            : 'Entrar como farmacia',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 49, 175, 180),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                         ),
                       ),
                     )

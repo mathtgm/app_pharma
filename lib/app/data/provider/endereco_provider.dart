@@ -81,4 +81,10 @@ class EnderecoApi extends GetConnect {
   void close() async {
     db.close();
   }
+
+  void esvaziarEndereco() async {
+    await open();
+    db.execute('DELETE FROM $table;');
+    db.close();
+  }
 }

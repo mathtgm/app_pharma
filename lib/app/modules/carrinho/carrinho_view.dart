@@ -8,8 +8,6 @@ import 'package:pharma_app/app/modules/carrinho/carrinho_controller.dart';
 import 'package:pharma_app/app/routes/app_routes.dart';
 
 class CarrinhoFarmacia extends GetView<CarrinhoController> {
-  final formPedido = GlobalKey<FormFieldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +37,12 @@ class CarrinhoFarmacia extends GetView<CarrinhoController> {
       ),
       body: SafeArea(
         child: controller.obx(
-          (list) => SingleChildScrollView(
-            child: Form(
+          (list) => Form(
+            key: controller.formkey,
+            child: SingleChildScrollView(
               child: Container(
-                height: Get.height,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     entregaTitulos('Endereço de entrega'),
                     enderecoEntregaCorpo(),
@@ -51,15 +50,44 @@ class CarrinhoFarmacia extends GetView<CarrinhoController> {
                     metodoPagamento('Cartão de Crédito', 'credito'),
                     metodoPagamento('Cartão de Débito', 'debito'),
                     metodoPagamento('Dinheiro', 'dinheiro'),
+                    Obx(
+                      () => Visibility(
+                        visible: controller.dinheiroFlag.value,
+                        child: Container(
+                          margin: EdgeInsets.all(12),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: controller.campoTroco,
+                            decoration: InputDecoration(
+                              label: Text('Valor em dinheiro'),
+                              prefixIcon: Icon(Icons.money_rounded),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) return 'Preencha esse campo';
+                              if (controller.campoTroco.doubleValue <
+                                  controller.total.value)
+                                return 'O valor ter que ser maior que o total';
+                            },
+                            onChanged: (value) {
+                              if (controller.campoTroco.doubleValue != 0) {
+                                controller.getTroco();
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
                     entregaTitulos('Produtos'),
-                    Container(
-                      height: 300,
-                      child: ListView.builder(
-                        itemCount: list.length,
-                        itemBuilder: (context, index) {
-                          ProdutoCarrinho prod = list[index];
-                          return Container(
-                            margin: EdgeInsets.all(12),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        ProdutoCarrinho prod = list[index];
+                        return InkWell(
+                          child: Container(
+                            height: 50,
+                            margin:
+                                EdgeInsets.only(left: 12, right: 12, top: 12),
                             child: Column(
                               children: [
                                 Row(
@@ -92,21 +120,124 @@ class CarrinhoFarmacia extends GetView<CarrinhoController> {
                                 Divider()
                               ],
                             ),
-                          );
-                        },
+                          ),
+                          onTap: () {
+                            Get.toNamed(Routes.carrinhoProduto,
+                                    arguments: prod.toMap())!
+                                .then((value) => controller.getCarrinho());
+                          },
+                        );
+                      },
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 12),
+                      child: Text(
+                        'Total carrinho: R\$ ' +
+                            controller.totalCarrinho.value
+                                .toStringAsFixed(2)
+                                .replaceAll('.', ','),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 49, 175, 180),
+                          fontSize: 18,
+                        ),
                       ),
                     ),
-                    Text(
-                      'Total: R\$ ' +
-                          controller.total.value
-                              .toStringAsFixed(2)
-                              .replaceAll('.', ','),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 49, 175, 180),
-                        fontSize: 18,
+                    Container(
+                      margin: EdgeInsets.only(right: 12),
+                      child: Text(
+                        'Frete: R\$ ' +
+                            controller.freteTotal.value
+                                .toStringAsFixed(2)
+                                .replaceAll('.', ','),
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 49, 175, 180),
+                          fontSize: 18,
+                        ),
                       ),
                     ),
+                    Divider(),
+                    Container(
+                      margin: EdgeInsets.only(right: 12),
+                      child: Text(
+                        'Total: R\$ ' +
+                            controller.total.value
+                                .toStringAsFixed(2)
+                                .replaceAll('.', ','),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 49, 175, 180),
+                          fontSize: 18,
+                        ),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                    Obx(
+                      () => Visibility(
+                        visible: controller.dinheiroFlag.value,
+                        child: Container(
+                          margin: EdgeInsets.all(12),
+                          child: Text(
+                            'Troco: ' +
+                                controller.troco.value
+                                    .toStringAsFixed(2)
+                                    .replaceAll('.', ','),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 49, 175, 180),
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 49, 175, 180),
+                                fixedSize: Size(150, 50),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero),
+                              ),
+                              onPressed: () {
+                                if (controller.formkey.currentState!
+                                    .validate()) {
+                                  controller.realizarPedido();
+                                }
+                              },
+                              child: Text(
+                                'Realizar pedido',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 49, 175, 180),
+                                fixedSize: Size(150, 50),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero),
+                              ),
+                              onPressed: () {
+                                controller.esvaziarCarrinho();
+                                Get.back();
+                              },
+                              child: Text(
+                                'Esvaziar carrinho',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -141,9 +272,12 @@ class CarrinhoFarmacia extends GetView<CarrinhoController> {
     if (controller.endereco == null) {
       return InkWell(
         onTap: () async {
-          controller.endereco =
+          var tempEnd =
               await Get.toNamed(Routes.endereco, arguments: 'selecionar');
-          controller.getCarrinho();
+          if (tempEnd != null) {
+            controller.endereco = Endereco.fromMap(tempEnd);
+            controller.getCarrinho();
+          }
         },
         child: Container(
           margin: EdgeInsets.only(bottom: 10),
@@ -167,12 +301,14 @@ class CarrinhoFarmacia extends GetView<CarrinhoController> {
         ),
       );
     } else {
-      controller.endereco = Endereco.fromMap(controller.endereco);
       return InkWell(
         onTap: () async {
-          controller.endereco =
+          var tempEnd =
               await Get.toNamed(Routes.endereco, arguments: 'selecionar');
-          controller.getCarrinho();
+          if (tempEnd != null) {
+            controller.endereco = Endereco.fromMap(tempEnd);
+            controller.getCarrinho();
+          }
         },
         child: Row(
           children: [
@@ -198,6 +334,12 @@ class CarrinhoFarmacia extends GetView<CarrinhoController> {
         value: valor,
         groupValue: controller.pagamento.value,
         onChanged: (value) {
+          if (value != 'dinheiro') {
+            controller.dinheiroFlag.value = false;
+          } else {
+            controller.dinheiroFlag.value = true;
+          }
+
           controller.pagamento.value = value.toString();
         },
       ),
