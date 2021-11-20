@@ -10,6 +10,7 @@ class FarmaciaMenuController extends GetxController with StateMixin {
   FarmaciaPedidoRepository rep = Get.find<FarmaciaPedidoRepository>();
   RxString nomeFarm = ''.obs;
   int idFarm = 0;
+
   @override
   void dispose() {
     _timer.cancel();
@@ -43,6 +44,7 @@ class FarmaciaMenuController extends GetxController with StateMixin {
   sairAplicativo() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.clear();
+    dispose();
     Get.offAllNamed(Routes.INITIAL);
   }
 }
