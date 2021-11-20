@@ -12,7 +12,16 @@ class FarmaciaPedidoRepository {
     return '';
   }
 
-  getPedidoOrdem(int idOrdemPedido) async {
+  getOrdemPedido(int idFarmacia) async {
+    var json = await api.getOrdemPedido(idFarmacia);
+    if (json != '') {
+      var res = jsonDecode(json);
+      return res;
+    } else
+      return '';
+  }
+
+  getPedidoProduto(int idOrdemPedido) async {
     var json = await api.getListaPedidoProdutoFarmacia(idOrdemPedido);
     List<PedidoProduto> list = [];
     if (json != '') {

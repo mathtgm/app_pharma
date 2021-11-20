@@ -19,6 +19,8 @@ import 'package:pharma_app/app/modules/listaFarmacia/ListaFarmacias_view.dart';
 import 'package:pharma_app/app/modules/listaFarmacia/listaFarmacias_binding.dart';
 import 'package:pharma_app/app/modules/listaPedidoUsuario/listaPedidoUsuario_binding.dart';
 import 'package:pharma_app/app/modules/listaPedidoUsuario/listaPedidoUsuario_view.dart';
+import 'package:pharma_app/app/modules/listaPedidosFarmacia/listaPedidosFarmacia_binding.dart';
+import 'package:pharma_app/app/modules/listaPedidosFarmacia/listaPedidosFarmacia_view.dart';
 import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_binding.dart';
 import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_view.dart';
 import 'package:pharma_app/app/modules/login/login_binding.dart';
@@ -97,6 +99,10 @@ class AppPages {
     GetPage(
         name: Routes.formProdutoFarmacia,
         page: () => FormProdutoFarmacia(),
-        binding: FormProdutoFarmaciaBinding())
+        binding: FormProdutoFarmaciaBinding()),
+    GetPage(
+        name: Routes.listaPedidoOrdem,
+        page: () => ListaPedidoFarmacia(),
+        binding: ListaPedidoFarmaciaBinding())
   ];
 }

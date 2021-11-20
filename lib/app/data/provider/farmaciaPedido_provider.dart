@@ -17,6 +17,21 @@ class FarmaciaPedidoApi {
     }
   }
 
+  Future<String> getOrdemPedido(int idFarmacia) async {
+    try {
+      var response = await http.post(
+          Uri.parse(database.site + 'farmacia/pedido/ordemPedido'),
+          body: {'idFarmacia': idFarmacia.toString()});
+
+      if (response.statusCode == 200)
+        return response.body;
+      else
+        return '';
+    } catch (TimeOutException) {
+      throw 'Falha ao conectar ao servidor';
+    }
+  }
+
   Future<String> getListaPedidoProdutoFarmacia(int idOrdemPedido) async {
     try {
       var res = await http.post(

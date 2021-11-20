@@ -14,4 +14,5 @@ abstract class Routes {
   static const detalhePedidosFarmacia = '/farmacia/principal/pedidoDetalhe';
   static const listaProdutosFarmacia = '/farmacia/listaProdutos';
   static const formProdutoFarmacia = '/farmacia/formProduto';
+  static const listaPedidoOrdem = '/farmacia/principal/pedidoOrdem';
 }

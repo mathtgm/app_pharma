@@ -7,9 +7,9 @@ import 'package:pharma_app/app/global/widgets/msgErro.dart';
 import 'package:pharma_app/app/modules/detalhePedidoFarmacia/detalhePedidoFarmacia_controller.dart';
 
 class DetalhePedidoFarmacia extends GetView<DetalhePedidoFarmaciaController> {
+  final DateFormat formatter = DateFormat('dd/MM/yyyy hh:mm');
   @override
   Widget build(BuildContext context) {
-    final DateFormat formatter = DateFormat('dd/MM/yyyy hh:mm');
     return Scaffold(
       appBar: AppBar(
         title: Text('Detalhe do pedido'),
@@ -122,67 +122,8 @@ class DetalhePedidoFarmacia extends GetView<DetalhePedidoFarmaciaController> {
                         ),
                       ),
                       Divider(),
-                      titulo('Ações'),
-                      Container(
-                        width: Get.width,
-                        child: TextButton(
-                          child: Text(
-                            'Preparar pedido',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () {
-                            controller.alterarStatus('Preparando');
-                          },
-                          style: TextButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 49, 175, 180),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: Get.width,
-                        child: TextButton(
-                          child: Text(
-                            'Enviado para o cliente',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 49, 175, 180),
-                          ),
-                          onPressed: () {
-                            controller.alterarStatus('Enviado para o cliente');
-                          },
-                        ),
-                      ),
-                      Container(
-                        width: Get.width,
-                        child: TextButton(
-                          child: Text(
-                            'Entregue',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.green,
-                          ),
-                          onPressed: () {
-                            controller.statusEntregar();
-                          },
-                        ),
-                      ),
-                      Container(
-                        width: Get.width,
-                        child: TextButton(
-                          child: Text(
-                            'Cancelar',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.red,
-                          ),
-                          onPressed: () {
-                            caixaMotivo();
-                          },
-                        ),
-                      ),
+                      caixaEntrega(),
+                      botaoAcao()
                     ],
                   ),
                 ),
@@ -190,6 +131,96 @@ class DetalhePedidoFarmacia extends GetView<DetalhePedidoFarmaciaController> {
           onEmpty: msgErro().telaErro(
               'Nenhum produto nesse pedido', ImagensTela.imgCarrinhoVazio)),
     );
+  }
+
+  Widget caixaEntrega() {
+    if (Get.arguments['status'] == 'Entregue')
+      return Center(
+        child: Container(
+          margin: EdgeInsets.only(top: 30),
+          padding: EdgeInsets.only(top: 10),
+          width: Get.width,
+          height: 50,
+          decoration: BoxDecoration(
+              color: Colors.lightGreen,
+              borderRadius: BorderRadius.circular(20)),
+          child: Text(
+            'Produto entregue \n${Get.arguments!['dataentrega'] == null ? '' : formatter.format(DateTime.parse(Get.arguments!['dataentrega']))}',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+    return Container();
+  }
+
+  Widget botaoAcao() {
+    if (Get.arguments['status'] != 'Cancelado' &&
+        Get.arguments['status'] != 'Entregue')
+      return Column(children: [
+        titulo('Ações'),
+        Container(
+          width: Get.width,
+          child: TextButton(
+            child: Text(
+              'Preparar pedido',
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () {
+              controller.alterarStatus('Preparando');
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 49, 175, 180),
+            ),
+          ),
+        ),
+        Container(
+          width: Get.width,
+          child: TextButton(
+            child: Text(
+              'Enviado para o cliente',
+              style: TextStyle(color: Colors.white),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 49, 175, 180),
+            ),
+            onPressed: () {
+              controller.alterarStatus('Enviado para o cliente');
+            },
+          ),
+        ),
+        Container(
+          width: Get.width,
+          child: TextButton(
+            child: Text(
+              'Entregue',
+              style: TextStyle(color: Colors.white),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.green,
+            ),
+            onPressed: () {
+              controller.statusEntregar();
+            },
+          ),
+        ),
+        Container(
+          width: Get.width,
+          child: TextButton(
+            child: Text(
+              'Cancelar',
+              style: TextStyle(color: Colors.white),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            onPressed: () {
+              caixaMotivo();
+            },
+          ),
+        ),
+      ]);
+    return Container();
   }
 
   titulo(String titulo) {

@@ -13,7 +13,7 @@ class DetalhePedidoFarmaciaController extends GetxController with StateMixin {
   }
 
   void getPedidoOrdem() async {
-    await repository.getPedidoOrdem(idOrdemPedido).then((value) {
+    await repository.getPedidoProduto(idOrdemPedido).then((value) {
       if (value != '')
         change(value, status: RxStatus.success());
       else

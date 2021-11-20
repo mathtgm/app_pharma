@@ -170,7 +170,9 @@ class FarmaciaMenu extends GetView<FarmaciaMenuController> {
               child: Column(
                 children: <Widget>[
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.listaPedidoOrdem);
+                    },
                     child: ListTile(
                       title: Row(
                         children: <Widget>[
