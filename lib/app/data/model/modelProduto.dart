@@ -4,7 +4,7 @@ class Produto {
   int id_produto;
   String nome;
   String? descricao;
-  String preco_unid;
+  double preco_unid;
   String? imagem;
   int id_farmacia;
   Produto({
@@ -20,7 +20,7 @@ class Produto {
     int? id_produto,
     String? nome,
     String? descricao,
-    String? preco_unid,
+    double? preco_unid,
     String? imagem,
     int? id_farmacia,
   }) {
@@ -50,7 +50,9 @@ class Produto {
       id_produto: map['id_produto'],
       nome: map['nome'],
       descricao: map['descricao'] != null ? map['descricao'] : null,
-      preco_unid: map['preco_unid'],
+      preco_unid: map['preco_unid'] is double
+          ? map['preco_unid']
+          : double.parse(map['preco_unid']),
       imagem: map['imagem'] != null ? map['imagem'] : null,
       id_farmacia: map['id_farmacia'],
     );

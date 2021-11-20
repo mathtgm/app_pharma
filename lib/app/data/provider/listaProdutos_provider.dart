@@ -17,4 +17,37 @@ class ListaProdutosApiClient extends GetConnect {
       return ('');
     }
   }
+
+  Future<void> alterarProduto(String prod) async {
+    await http.post(
+      Uri.parse(database.site + 'farmacia/produtos/alterar'),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: prod,
+    );
+  }
+
+  Future<void> excluirProduto(String prod) async {
+    await http.post(
+      Uri.parse(database.site + 'farmacia/produtos/excluir'),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: prod,
+    );
+  }
+
+  Future<void> cadastrarProduto(String prod) async {
+    await http.post(
+      Uri.parse(database.site + 'farmacia/produtos/cadastrar'),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: prod,
+    );
+  }
 }

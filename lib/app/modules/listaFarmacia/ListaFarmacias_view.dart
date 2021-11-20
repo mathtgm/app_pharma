@@ -62,22 +62,32 @@ class listaFarmaciaState extends GetView<ListaController> {
                       child: Row(
                         children: [
                           Container(
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100))),
-                              child: farm.foto == null
-                                  ? Image.asset(
-                                      'assets/StandartIcon.png',
-                                      fit: BoxFit.cover,
-                                      height: 100,
-                                      width: 100,
-                                    )
-                                  : Image.network(
-                                      farm.foto!,
-                                      fit: BoxFit.cover,
-                                      height: 100,
-                                      width: 100,
-                                    )),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100))),
+                            child: farm.foto == null
+                                ? Image.asset(
+                                    'assets/StandartIcon.png',
+                                    fit: BoxFit.cover,
+                                    height: 100,
+                                    width: 100,
+                                  )
+                                : Image.network(
+                                    farm.foto!,
+                                    fit: BoxFit.cover,
+                                    height: 100,
+                                    width: 100,
+                                    errorBuilder:
+                                        (context, exception, stackTrace) {
+                                      return Image.asset(
+                                        'assets/StandartIcon.png',
+                                        fit: BoxFit.cover,
+                                        height: 100,
+                                        width: 100,
+                                      );
+                                    },
+                                  ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Column(

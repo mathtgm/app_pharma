@@ -107,18 +107,27 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
       ),
       alignment: Alignment.topCenter,
       child: ClipRRect(
-          borderRadius: BorderRadius.all(
-            Radius.circular(20),
-          ),
-          child: imagem == null
-              ? Image.asset(
-                  'assets/produto_default.png',
-                  width: 100,
-                )
-              : Image.network(
-                  imagem,
-                  width: 100,
-                )),
+        borderRadius: BorderRadius.all(
+          Radius.circular(20),
+        ),
+        child: imagem == null
+            ? Image.asset(
+                'assets/produto_default.png',
+                width: 100,
+              )
+            : Image.network(
+                imagem,
+                width: 100,
+                errorBuilder: (context, exception, stackTrace) {
+                  return Image.asset(
+                    'assets/produto_default.png',
+                    fit: BoxFit.cover,
+                    height: 100,
+                    width: 100,
+                  );
+                },
+              ),
+      ),
     );
   }
 
@@ -168,7 +177,10 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
                 ),
               ),
               child: Text(
-                "R\$ " + prod.preco_unid.replaceAll(".", ","),
+                "R\$ " +
+                    num.parse(prod.preco_unid.toString())
+                        .toStringAsFixed(2)
+                        .replaceAll('.', ','),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -202,6 +214,14 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
               : Image.network(
                   Get.arguments['foto'],
                   fit: BoxFit.cover,
+                  errorBuilder: (context, exception, stackTrace) {
+                    return Image.asset(
+                      'assets/StandartIcon.png',
+                      fit: BoxFit.cover,
+                      height: 100,
+                      width: 100,
+                    );
+                  },
                 ),
         ),
         Padding(

@@ -47,9 +47,9 @@ class CarrinhoFarmacia extends GetView<CarrinhoController> {
                     entregaTitulos('Endereço de entrega'),
                     enderecoEntregaCorpo(),
                     entregaTitulos('Método de pagamento'),
-                    metodoPagamento('Cartão de Crédito', 'credito'),
-                    metodoPagamento('Cartão de Débito', 'debito'),
-                    metodoPagamento('Dinheiro', 'dinheiro'),
+                    metodoPagamento('Cartão de Crédito', 'Cartão de Crédito'),
+                    metodoPagamento('Cartão de Débito', 'Cartão de Débito'),
+                    metodoPagamento('Dinheiro', 'Dinheiro'),
                     Obx(
                       () => Visibility(
                         visible: controller.dinheiroFlag.value,
@@ -334,7 +334,7 @@ class CarrinhoFarmacia extends GetView<CarrinhoController> {
         value: valor,
         groupValue: controller.pagamento.value,
         onChanged: (value) {
-          if (value != 'dinheiro') {
+          if (value != 'Dinheiro') {
             controller.dinheiroFlag.value = false;
           } else {
             controller.dinheiroFlag.value = true;

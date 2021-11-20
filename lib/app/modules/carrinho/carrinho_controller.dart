@@ -20,6 +20,7 @@ class CarrinhoController extends GetxController with StateMixin {
   Farmacia farm =
       Farmacia.fromMap(Get.arguments); //Converte um Map para farmacia
   var endereco = null;
+  double dinheiro = 0.00;
 
   //Variaveis de observação
   RxString pagamento = ''.obs;
@@ -72,6 +73,7 @@ class CarrinhoController extends GetxController with StateMixin {
   }
 
   void getTroco() {
+    dinheiro = campoTroco.doubleValue;
     troco.value = campoTroco.doubleValue - total.value;
   }
 
@@ -90,7 +92,7 @@ class CarrinhoController extends GetxController with StateMixin {
           endereco,
           total.value,
           freteTotal.value,
-          dinheiroFlag.value ? troco.value : 0.00,
+          pagamento.value == 'Dinheiro' ? dinheiro : 0.00,
           pagamento.value,
           prodList,
           pref.getInt('id')!,

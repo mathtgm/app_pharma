@@ -43,7 +43,17 @@ class ProdutoFarmacia extends GetView<ProdutoController> {
                 height: 200,
                 child: Get.arguments['imagem'] == null
                     ? Image.asset('assets/produto_default.png')
-                    : Image.network(Get.arguments['imagem']),
+                    : Image.network(
+                        Get.arguments['imagem'],
+                        errorBuilder: (context, exception, stackTrace) {
+                          return Image.asset(
+                            'assets/produto_default.png',
+                            fit: BoxFit.cover,
+                            height: 100,
+                            width: 100,
+                          );
+                        },
+                      ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
@@ -117,8 +127,9 @@ class ProdutoFarmacia extends GetView<ProdutoController> {
             highlightColor: Colors.transparent,
             onTap: () {
               controller.quantProduto.value += 1;
-              controller.total.value = controller.quantProduto.value *
-                  double.parse(Get.arguments['preco_unid']);
+              controller.total.value =
+                  double.parse(controller.quantProduto.value.toString()) *
+                      Get.arguments['preco_unid'];
             },
             child: Container(
               height: 40,

@@ -43,7 +43,17 @@ class ProdutoCarrinho extends GetView<ProdutoCarrinhoController> {
                 height: 200,
                 child: Get.arguments['imagem'] == null
                     ? Image.asset('assets/produto_default.png')
-                    : Image.network(Get.arguments['imagem']),
+                    : Image.network(
+                        Get.arguments['imagem'],
+                        errorBuilder: (context, exception, stackTrace) {
+                          return Image.asset(
+                            'assets/produto_default.png',
+                            fit: BoxFit.cover,
+                            height: 100,
+                            width: 100,
+                          );
+                        },
+                      ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [

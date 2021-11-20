@@ -63,23 +63,33 @@ class ListaPedidoUsuario extends GetView<ListaPedidoUsuarioController> {
                       child: Row(
                         children: [
                           Container(
-                              margin: EdgeInsets.only(right: 12, left: 12),
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100))),
-                              child: list[index]['foto'] == null
-                                  ? Image.asset(
-                                      'assets/StandartIcon.png',
-                                      fit: BoxFit.cover,
-                                      height: 50,
-                                      width: 50,
-                                    )
-                                  : Image.network(
-                                      list[index]['foto'],
-                                      fit: BoxFit.cover,
-                                      height: 50,
-                                      width: 50,
-                                    )),
+                            margin: EdgeInsets.only(right: 12, left: 12),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100))),
+                            child: list[index]['foto'] == null
+                                ? Image.asset(
+                                    'assets/StandartIcon.png',
+                                    fit: BoxFit.cover,
+                                    height: 50,
+                                    width: 50,
+                                  )
+                                : Image.network(
+                                    list[index]['foto'],
+                                    fit: BoxFit.cover,
+                                    height: 50,
+                                    width: 50,
+                                    errorBuilder:
+                                        (context, exception, stackTrace) {
+                                      return Image.asset(
+                                        'assets/StandartIcon.png',
+                                        fit: BoxFit.cover,
+                                        height: 100,
+                                        width: 100,
+                                      );
+                                    },
+                                  ),
+                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,

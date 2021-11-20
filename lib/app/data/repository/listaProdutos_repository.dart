@@ -18,4 +18,16 @@ class ListaProdutosRepository {
     }
     return list;
   }
+
+  Future<void> alterarProduto(Produto prod) async {
+    await api.alterarProduto(prod.toJson());
+  }
+
+  Future<void> excluirProduto(Produto prod) async {
+    await api.excluirProduto(prod.toJson());
+  }
+
+  Future<void> cadastrarProduto(Produto prod) async {
+    await api.cadastrarProduto(prod.toJson());
+  }
 }

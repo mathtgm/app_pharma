@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:pharma_app/app/data/model/modelPedidoProduto.dart';
 import 'package:pharma_app/app/global/widgets/images.dart';
 import 'package:pharma_app/app/global/widgets/msgErro.dart';
-import 'package:pharma_app/app/modules/detalhePeedidoUsuario/detalhePedidoUsuario_controller.dart';
+import 'package:pharma_app/app/modules/detalhePedidoUsuario/detalhePedidoUsuario_controller.dart';
 import 'package:pharma_app/app/routes/app_routes.dart';
 
 class DetalhePedidoUsuario extends GetView<DetalhePedidoUsuarioController> {
@@ -138,7 +138,7 @@ class DetalhePedidoUsuario extends GetView<DetalhePedidoUsuarioController> {
                   Visibility(
                     visible: controller.trocoFlag,
                     child: Text(
-                      'Troco: R\$ ${Get.arguments['troco'].replaceAll('.', ',')}',
+                      'Troco: R\$ ${(double.parse(Get.arguments['troco']) - double.parse(Get.arguments['totalpedido'])).toString().replaceAll('.', ',')}',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class DetalhePedidoUsuario extends GetView<DetalhePedidoUsuarioController> {
                     ),
                   ),
                   Visibility(
-                    visible: controller.statusFlag,
+                    visible: !controller.statusFlag3,
                     child: Container(
                       width: Get.width,
                       height: 50,
@@ -172,7 +172,7 @@ class DetalhePedidoUsuario extends GetView<DetalhePedidoUsuarioController> {
                     ),
                   ),
                   Visibility(
-                    visible: !controller.statusFlag,
+                    visible: controller.statusFlag3,
                     child: Container(
                       width: Get.width,
                       height: 50,
@@ -217,6 +217,31 @@ class DetalhePedidoUsuario extends GetView<DetalhePedidoUsuarioController> {
                           'Confirmar entrega',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: controller.cancelado,
+                    child: Container(
+                      width: Get.width,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: Colors.red[100],
+                          borderRadius: BorderRadius.circular(10)),
+                      margin: EdgeInsets.only(top: 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Seu pedido foi cancelado \nMotivo: ${Get.arguments['motivo']}',
+                            softWrap: true,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 49, 175, 180)),
+                          ),
+                        ],
                       ),
                     ),
                   ),

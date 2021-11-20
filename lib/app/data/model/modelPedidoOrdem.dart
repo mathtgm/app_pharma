@@ -11,6 +11,7 @@ class PedidoOrdem {
   String? datapedido;
   double? troco;
   String metodopagamento;
+  String? motivo;
   PedidoOrdem({
     required this.id_ordempedido,
     required this.totalpedido,
@@ -22,6 +23,7 @@ class PedidoOrdem {
     required this.datapedido,
     required this.troco,
     required this.metodopagamento,
+    this.motivo,
   });
 
   PedidoOrdem copyWith({
@@ -35,6 +37,7 @@ class PedidoOrdem {
     String? datapedido,
     double? troco,
     String? metodopagamento,
+    String? motivo,
   }) {
     return PedidoOrdem(
       id_ordempedido: id_ordempedido ?? this.id_ordempedido,
@@ -47,6 +50,7 @@ class PedidoOrdem {
       datapedido: datapedido ?? this.datapedido,
       troco: troco ?? this.troco,
       metodopagamento: metodopagamento ?? this.metodopagamento,
+      motivo: motivo ?? this.motivo,
     );
   }
 
@@ -62,6 +66,7 @@ class PedidoOrdem {
       'datapedido': datapedido,
       'troco': troco,
       'metodopagamento': metodopagamento,
+      'motivo': motivo,
     };
   }
 
@@ -77,6 +82,7 @@ class PedidoOrdem {
       datapedido: map['datapedido'] != null ? map['datapedido'] : null,
       troco: map['troco'] != null ? map['troco'] : null,
       metodopagamento: map['metodopagamento'],
+      motivo: map['motivo'] != null ? map['motivo'] : null,
     );
   }
 
@@ -87,7 +93,7 @@ class PedidoOrdem {
 
   @override
   String toString() {
-    return 'PedidoOrdem(id_ordempedido: $id_ordempedido, totalpedido: $totalpedido, enderecoentrega: $enderecoentrega, frete: $frete, id_usuario: $id_usuario, id_farmacia: $id_farmacia, dataentrega: $dataentrega, datapedido: $datapedido, troco: $troco, metodopagamento: $metodopagamento)';
+    return 'PedidoOrdem(id_ordempedido: $id_ordempedido, totalpedido: $totalpedido, enderecoentrega: $enderecoentrega, frete: $frete, id_usuario: $id_usuario, id_farmacia: $id_farmacia, dataentrega: $dataentrega, datapedido: $datapedido, troco: $troco, metodopagamento: $metodopagamento, motivo: $motivo)';
   }
 
   @override
@@ -104,7 +110,8 @@ class PedidoOrdem {
         other.dataentrega == dataentrega &&
         other.datapedido == datapedido &&
         other.troco == troco &&
-        other.metodopagamento == metodopagamento;
+        other.metodopagamento == metodopagamento &&
+        other.motivo == motivo;
   }
 
   @override
@@ -118,6 +125,7 @@ class PedidoOrdem {
         dataentrega.hashCode ^
         datapedido.hashCode ^
         troco.hashCode ^
-        metodopagamento.hashCode;
+        metodopagamento.hashCode ^
+        motivo.hashCode;
   }
 }
