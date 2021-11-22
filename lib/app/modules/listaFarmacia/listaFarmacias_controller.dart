@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ListaController extends GetxController with StateMixin {
   final repository = Get.find<listaFarmaciaRepository>();
   var info = ''.obs;
+  var id = 0;
   PositionController location = PositionController();
   late Position distUser;
 
@@ -27,8 +28,6 @@ class ListaController extends GetxController with StateMixin {
     await repository.listaFarmacias(cidade, estado).then((value) {
       change(value, status: RxStatus.success());
       if (value == '') change(value, status: RxStatus.empty());
-    }).catchError((err) {
-      change(err, status: RxStatus.error(err));
     });
     getPreferences();
   }
@@ -37,6 +36,7 @@ class ListaController extends GetxController with StateMixin {
   getPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var nome = prefs.getString('name').toString();
+    id = prefs.getInt('id')!;
     info(nome);
   }
 

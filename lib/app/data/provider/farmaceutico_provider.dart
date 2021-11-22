@@ -19,4 +19,55 @@ class FarmaceuticoApiClient extends GetConnect {
       return ('');
     }
   }
+
+  Future<bool> cadastrartFarmaceutico(String farmaceutico) async {
+    try {
+      var response = await http.post(
+          Uri.parse(database.site + 'farmacia/farmaceutico/cadastrar'),
+          body: farmaceutico,
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          });
+      if (response.statusCode == 500)
+        return false;
+      else
+        return true;
+    } catch (TimeoutException) {
+      throw 'Servidor não encontrado, verifique a conexão com a internet';
+    }
+  }
+
+  Future<bool> atualizarFarmaceutico(String farmaceutico) async {
+    try {
+      var res = await http.post(
+          Uri.parse(database.site + 'farmacia/farmaceutico/atualizar'),
+          body: farmaceutico,
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          });
+      if (res.statusCode == 200)
+        return true;
+      else
+        return false;
+    } catch (TimeoutException) {
+      throw 'Servidor não encontrado, verifique a conexão com a internet';
+    }
+  }
+
+  Future<bool> excluirFarmaceutico(int idFarmaceutico) async {
+    try {
+      var res = await http.post(
+        Uri.parse(database.site + 'farmacia/farmaceutico/excluir'),
+        body: {"id_farmaceutico": idFarmaceutico.toString()},
+      );
+      if (res.statusCode == 200)
+        return true;
+      else
+        return false;
+    } catch (TimeoutException) {
+      throw 'Servidor não encontrado, verifique a conexão com a internet';
+    }
+  }
 }

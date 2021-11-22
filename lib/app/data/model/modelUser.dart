@@ -1,28 +1,41 @@
 import 'dart:convert';
 
 class Usuario {
-  int id_usuario;
+  int? id_usuario;
   String nome;
+  String email;
   String celular;
+  String? senha;
   String cpf;
+  String nascimento;
+
   Usuario({
-    required this.id_usuario,
+    this.id_usuario,
     required this.nome,
+    required this.email,
     required this.celular,
+    this.senha,
     required this.cpf,
+    required this.nascimento,
   });
 
   Usuario copyWith({
     int? id_usuario,
     String? nome,
+    String? email,
     String? celular,
+    String? senha,
     String? cpf,
+    String? nascimento,
   }) {
     return Usuario(
       id_usuario: id_usuario ?? this.id_usuario,
       nome: nome ?? this.nome,
+      email: email ?? this.email,
       celular: celular ?? this.celular,
+      senha: senha ?? this.senha,
       cpf: cpf ?? this.cpf,
+      nascimento: nascimento ?? this.nascimento,
     );
   }
 
@@ -30,17 +43,23 @@ class Usuario {
     return {
       'id_usuario': id_usuario,
       'nome': nome,
+      'email': email,
       'celular': celular,
+      'senha': senha,
       'cpf': cpf,
+      'nascimento': nascimento,
     };
   }
 
   factory Usuario.fromMap(Map<String, dynamic> map) {
     return Usuario(
-      id_usuario: map['id_usuario'],
+      id_usuario: map['id_usuario'] != null ? map['id_usuario'] : null,
       nome: map['nome'],
+      email: map['email'],
       celular: map['celular'],
+      senha: map['senha'] != null ? map['senha'] : null,
       cpf: map['cpf'],
+      nascimento: map['nascimento'],
     );
   }
 
@@ -51,7 +70,7 @@ class Usuario {
 
   @override
   String toString() {
-    return 'Usuario(id_usuario: $id_usuario, nome: $nome, celular: $celular, cpf: $cpf)';
+    return 'Usuario(id_usuario: $id_usuario, nome: $nome, email: $email, celular: $celular, senha: $senha, cpf: $cpf, nascimento: $nascimento)';
   }
 
   @override
@@ -61,15 +80,21 @@ class Usuario {
     return other is Usuario &&
         other.id_usuario == id_usuario &&
         other.nome == nome &&
+        other.email == email &&
         other.celular == celular &&
-        other.cpf == cpf;
+        other.senha == senha &&
+        other.cpf == cpf &&
+        other.nascimento == nascimento;
   }
 
   @override
   int get hashCode {
     return id_usuario.hashCode ^
         nome.hashCode ^
+        email.hashCode ^
         celular.hashCode ^
-        cpf.hashCode;
+        senha.hashCode ^
+        cpf.hashCode ^
+        nascimento.hashCode;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharma_app/app/modules/formEndereco/formEndereco_controller.dart';
+import 'package:pharma_app/app/routes/app_routes.dart';
 
 class FormEndereco extends GetView<FormEnderecoController> {
   @override
@@ -97,9 +98,10 @@ class FormEndereco extends GetView<FormEnderecoController> {
 
   Widget botaoCadastro() {
     return TextButton(
-      onPressed: () {
+      onPressed: () async {
         if (controller.formkey.currentState!.validate()) {
-          controller.cadastrarEndereco();
+          var pos = await Get.toNamed(Routes.mapa);
+          controller.cadastrarEndereco(pos);
           Get.back();
         }
       },
@@ -116,8 +118,9 @@ class FormEndereco extends GetView<FormEnderecoController> {
 
   Widget botaoAtualizar() {
     return TextButton(
-      onPressed: () {
+      onPressed: () async {
         if (controller.formkey.currentState!.validate()) {
+          var pos = await Get.toNamed(Routes.mapa);
           controller.atualizarEndereco();
           Get.back();
         }

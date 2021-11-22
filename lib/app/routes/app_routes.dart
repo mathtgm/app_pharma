@@ -15,4 +15,8 @@ abstract class Routes {
   static const listaProdutosFarmacia = '/farmacia/listaProdutos';
   static const formProdutoFarmacia = '/farmacia/formProduto';
   static const listaPedidoOrdem = '/farmacia/principal/pedidoOrdem';
+  static const mapa = '/mapa';
+  static const formUsuario = '/formUsuario';
+  static const formFarmacia = '/formFarmacia';
+  static const formFarmaceutico = '/farmacia/';
 }

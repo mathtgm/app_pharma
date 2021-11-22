@@ -48,6 +48,7 @@ class EnderecoView extends GetView<EnderecoController> {
           height: Get.height,
           child: controller.obx(
             (list) => ListView.builder(
+              shrinkWrap: true,
               itemCount: list.length,
               itemBuilder: (context, index) {
                 Endereco end = list[index];

@@ -240,22 +240,6 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
               Container(
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.star_rounded,
-                      color: Colors.amber,
-                      size: 15,
-                    ),
-                    Text(
-                      Get.arguments['nota'],
-                      style: TextStyle(
-                        color: Colors.amber,
-                        fontSize: 15,
-                      ),
-                    ),
-                    Text(
-                      ' • ',
-                      style: TextStyle(fontSize: 20, color: Colors.grey),
-                    ),
                     Text(
                       dist.toPrecision(1).toString() + ' Km',
                       style: TextStyle(fontSize: 15, color: Colors.grey),
@@ -276,8 +260,7 @@ class ListaProdutosFarmacia extends GetView<ListaProdutosController> {
                     (Get.arguments['frete'] == 0
                         ? 'GRÁTIS'
                         : controller.location
-                            .getFrete(
-                                dist, double.parse(Get.arguments['frete']))
+                            .getFrete(dist, Get.arguments['frete'])
                             .toStringAsFixed(2)
                             .replaceAll('.', ',')),
                 style: TextStyle(fontSize: 15, color: Colors.grey),

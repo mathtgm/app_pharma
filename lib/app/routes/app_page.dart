@@ -9,8 +9,14 @@ import 'package:pharma_app/app/modules/farmaciaMenu/farmaciaMenu_binding.dart';
 import 'package:pharma_app/app/modules/farmaciaMenu/farmaciaMenu_view.dart';
 import 'package:pharma_app/app/modules/formEndereco/formEndereco_binding.dart';
 import 'package:pharma_app/app/modules/formEndereco/formEndereco_view.dart';
+import 'package:pharma_app/app/modules/formFarmaceutico/formFarmaceutico_binding.dart';
+import 'package:pharma_app/app/modules/formFarmaceutico/formFarmaceutico_view.dart';
+import 'package:pharma_app/app/modules/formFarmacia/formFarmacia_binding.dart';
+import 'package:pharma_app/app/modules/formFarmacia/formFarmacia_view.dart';
 import 'package:pharma_app/app/modules/formProdutoFarmacia/formProduto_binding.dart';
 import 'package:pharma_app/app/modules/formProdutoFarmacia/formProduto_view.dart';
+import 'package:pharma_app/app/modules/formUsuario/formUsuario_binding.dart';
+import 'package:pharma_app/app/modules/formUsuario/formUsuario_view.dart';
 import 'package:pharma_app/app/modules/listaEnderecos/endereco_binding.dart';
 import 'package:pharma_app/app/modules/listaEnderecos/endereco_view.dart';
 import 'package:pharma_app/app/modules/listaFarmaceutico/farmaceutico_binding.dart';
@@ -25,6 +31,8 @@ import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_binding.dart'
 import 'package:pharma_app/app/modules/listaProdutos/listaProdutos_view.dart';
 import 'package:pharma_app/app/modules/login/login_binding.dart';
 import 'package:pharma_app/app/modules/login/login_view.dart';
+import 'package:pharma_app/app/modules/mapa/mapa_view.dart';
+import 'package:pharma_app/app/modules/mapa/mapa_binding.dart';
 import 'package:pharma_app/app/modules/produto/produto_binding.dart';
 import 'package:pharma_app/app/modules/produto/produto_view.dart';
 import 'package:pharma_app/app/modules/produtoCarrinho/produtoCarrinho_binding.dart';
@@ -103,6 +111,19 @@ class AppPages {
     GetPage(
         name: Routes.listaPedidoOrdem,
         page: () => ListaPedidoFarmacia(),
-        binding: ListaPedidoFarmaciaBinding())
+        binding: ListaPedidoFarmaciaBinding()),
+    GetPage(name: Routes.mapa, page: () => Mapa(), binding: MapaBinding()),
+    GetPage(
+        name: Routes.formUsuario,
+        page: () => FormUsuario(),
+        binding: FormUsuarioBinding()),
+    GetPage(
+        name: Routes.formFarmacia,
+        page: () => FormFarmacia(),
+        binding: FormFarmaciaBinding()),
+    GetPage(
+        name: Routes.formFarmaceutico,
+        page: () => FormFarmaceutico(),
+        binding: FormFarmaceuticoBinding())
   ];
 }

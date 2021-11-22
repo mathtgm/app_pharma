@@ -55,7 +55,7 @@ class PedidoApi extends GetConnect {
       } else {
         return ('');
       }
-    } catch (e) {
+    } catch (TimeoutException) {
       throw 'Servidor não encontrado, verifique a conexão com a internet';
     }
   }

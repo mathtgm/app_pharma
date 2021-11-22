@@ -13,7 +13,11 @@ class FarmaciaMenu extends GetView<FarmaciaMenuController> {
     final DateFormat formatter = DateFormat('dd/MM/yyyy hh:mm');
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text(controller.nomeFarm.value)),
+        title: Obx(() => Text(
+              controller.nomeFarm.value,
+              softWrap: false,
+              maxLines: 2,
+            )),
         leading: Builder(
           builder: (context) {
             return SafeArea(
@@ -130,13 +134,21 @@ class FarmaciaMenu extends GetView<FarmaciaMenuController> {
                                 () => Text(
                                   controller.nomeFarm.value,
                                   textAlign: TextAlign.left,
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
                                   style: TextStyle(
                                     fontSize: 25,
                                   ),
                                 ),
                               )),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await Get.toNamed(Routes.formFarmacia,
+                                  arguments: 'farmacia');
+                              controller.timer.cancel();
+                              controller.onInit();
+                            },
                             style: ButtonStyle(
                               enableFeedback: false,
                               overlayColor: MaterialStateProperty.all<Color>(
@@ -207,6 +219,73 @@ class FarmaciaMenu extends GetView<FarmaciaMenuController> {
                             padding: EdgeInsets.only(left: 15.0),
                             child: Text(
                               'Produtos',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.farmaceutico,
+                          arguments: controller.idFarm);
+                    },
+                    child: ListTile(
+                      title: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.person,
+                            size: 25,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 15.0),
+                            child: Text(
+                              "Farmacêutico",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      controller.abrirFarmacia();
+                    },
+                    child: ListTile(
+                      title: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.business,
+                            size: 25,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 15.0),
+                            child: Text(
+                              "Abrir farmacia",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      controller.fecharFarmacia();
+                    },
+                    child: ListTile(
+                      title: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.business,
+                            size: 25,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 15.0),
+                            child: Text(
+                              "Fechar farmacia",
                               style: TextStyle(fontSize: 18),
                             ),
                           ),

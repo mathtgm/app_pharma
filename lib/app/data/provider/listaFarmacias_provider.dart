@@ -20,6 +20,7 @@ class ListaApiClient extends GetConnect {
         return ('');
       }
     } catch (TimeoutConnection) {
+      print('Foi erro');
       throw 'Servidor não encontrado, verifique a conexão com a internet';
     }
   }

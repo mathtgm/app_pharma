@@ -1,38 +1,40 @@
 import 'dart:convert';
 
 class Farmacia {
-  int id_farmacia;
+  int? id_farmacia;
   String nome_fantasia;
+  String email;
+  String? senha;
+  String cnpj;
   String telefone;
   String endereco;
   String numero;
   String bairro;
-  String data_cad;
-  String cidade;
-  String estado;
-  String nota;
+  String? cidade;
+  String? estado;
   double lat;
   double long;
   String? foto;
-  bool aberto;
+  bool? aberto;
   String tempo;
-  String frete;
+  double frete;
 
   Farmacia({
-    required this.id_farmacia,
+    this.id_farmacia,
     required this.nome_fantasia,
+    required this.email,
+    this.senha,
+    required this.cnpj,
     required this.telefone,
     required this.endereco,
     required this.numero,
     required this.bairro,
-    required this.data_cad,
-    required this.cidade,
-    required this.estado,
-    required this.nota,
+    this.cidade,
+    this.estado,
     required this.lat,
     required this.long,
-    required this.foto,
-    required this.aberto,
+    this.foto,
+    this.aberto,
     required this.tempo,
     required this.frete,
   });
@@ -40,32 +42,34 @@ class Farmacia {
   Farmacia copyWith({
     int? id_farmacia,
     String? nome_fantasia,
+    String? email,
+    String? senha,
+    String? cnpj,
     String? telefone,
     String? endereco,
     String? numero,
     String? bairro,
-    String? data_cad,
     String? cidade,
     String? estado,
-    String? nota,
     double? lat,
     double? long,
     String? foto,
     bool? aberto,
     String? tempo,
-    String? frete,
+    double? frete,
   }) {
     return Farmacia(
       id_farmacia: id_farmacia ?? this.id_farmacia,
       nome_fantasia: nome_fantasia ?? this.nome_fantasia,
+      email: email ?? this.email,
+      senha: senha ?? this.senha,
+      cnpj: cnpj ?? this.cnpj,
       telefone: telefone ?? this.telefone,
       endereco: endereco ?? this.endereco,
       numero: numero ?? this.numero,
       bairro: bairro ?? this.bairro,
-      data_cad: data_cad ?? this.data_cad,
       cidade: cidade ?? this.cidade,
       estado: estado ?? this.estado,
-      nota: nota ?? this.nota,
       lat: lat ?? this.lat,
       long: long ?? this.long,
       foto: foto ?? this.foto,
@@ -79,14 +83,15 @@ class Farmacia {
     return {
       'id_farmacia': id_farmacia,
       'nome_fantasia': nome_fantasia,
+      'email': email,
+      'senha': senha,
+      'cnpj': cnpj,
       'telefone': telefone,
       'endereco': endereco,
       'numero': numero,
       'bairro': bairro,
-      'data_cad': data_cad,
       'cidade': cidade,
       'estado': estado,
-      'nota': nota,
       'lat': lat,
       'long': long,
       'foto': foto,
@@ -98,22 +103,23 @@ class Farmacia {
 
   factory Farmacia.fromMap(Map<String, dynamic> map) {
     return Farmacia(
-      id_farmacia: map['id_farmacia'],
+      id_farmacia: map['id_farmacia'] != null ? map['id_farmacia'] : null,
       nome_fantasia: map['nome_fantasia'],
+      email: map['email'],
+      senha: map['senha'] != null ? map['senha'] : null,
+      cnpj: map['cnpj'],
       telefone: map['telefone'],
       endereco: map['endereco'],
       numero: map['numero'],
       bairro: map['bairro'],
-      data_cad: map['data_cad'],
-      cidade: map['cidade'],
-      estado: map['estado'],
-      nota: map['nota'],
+      cidade: map['cidade'] != null ? map['cidade'] : null,
+      estado: map['estado'] != null ? map['estado'] : null,
       lat: map['lat'],
       long: map['long'],
       foto: map['foto'] != null ? map['foto'] : null,
-      aberto: map['aberto'],
+      aberto: map['aberto'] != null ? map['aberto'] : null,
       tempo: map['tempo'],
-      frete: map['frete'],
+      frete: map['frete'] is String ? double.parse(map['frete']) : map['frete'],
     );
   }
 
@@ -124,7 +130,7 @@ class Farmacia {
 
   @override
   String toString() {
-    return 'Farmacia(id_farmacia: $id_farmacia, nome_fantasia: $nome_fantasia, telefone: $telefone, endereco: $endereco, numero: $numero, bairro: $bairro, data_cad: $data_cad, cidade: $cidade, estado: $estado, nota: $nota, lat: $lat, long: $long, foto: $foto, aberto: $aberto, tempo: $tempo, frete: $frete)';
+    return 'Farmacia(id_farmacia: $id_farmacia, nome_fantasia: $nome_fantasia, email: $email, senha: $senha, cnpj: $cnpj, telefone: $telefone, endereco: $endereco, numero: $numero, bairro: $bairro, cidade: $cidade, estado: $estado, lat: $lat, long: $long, foto: $foto, aberto: $aberto, tempo: $tempo, frete: $frete)';
   }
 
   @override
@@ -134,14 +140,15 @@ class Farmacia {
     return other is Farmacia &&
         other.id_farmacia == id_farmacia &&
         other.nome_fantasia == nome_fantasia &&
+        other.email == email &&
+        other.senha == senha &&
+        other.cnpj == cnpj &&
         other.telefone == telefone &&
         other.endereco == endereco &&
         other.numero == numero &&
         other.bairro == bairro &&
-        other.data_cad == data_cad &&
         other.cidade == cidade &&
         other.estado == estado &&
-        other.nota == nota &&
         other.lat == lat &&
         other.long == long &&
         other.foto == foto &&
@@ -154,14 +161,15 @@ class Farmacia {
   int get hashCode {
     return id_farmacia.hashCode ^
         nome_fantasia.hashCode ^
+        email.hashCode ^
+        senha.hashCode ^
+        cnpj.hashCode ^
         telefone.hashCode ^
         endereco.hashCode ^
         numero.hashCode ^
         bairro.hashCode ^
-        data_cad.hashCode ^
         cidade.hashCode ^
         estado.hashCode ^
-        nota.hashCode ^
         lat.hashCode ^
         long.hashCode ^
         foto.hashCode ^

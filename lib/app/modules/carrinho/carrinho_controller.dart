@@ -58,8 +58,7 @@ class CarrinhoController extends GetxController with StateMixin {
                   double.parse(endereco.long), farm.lat, farm.long) /
               1000)
           .toStringAsFixed(0);
-      freteTotal.value =
-          pos.getFrete(double.parse(distancia), double.parse(farm.frete));
+      freteTotal.value = pos.getFrete(double.parse(distancia), farm.frete);
     }
   }
 
@@ -96,7 +95,7 @@ class CarrinhoController extends GetxController with StateMixin {
           pagamento.value,
           prodList,
           pref.getInt('id')!,
-          farm.id_farmacia,
+          farm.id_farmacia!,
           idOrdemPedido);
       esvaziarCarrinho();
       Get.offNamed(Routes.listaPedidosUsuario);

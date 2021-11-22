@@ -1,13 +1,15 @@
 import 'dart:convert';
 
 class Farmaceutico {
-  int id_farmaceutico;
+  int? id_farmaceutico;
+  int? id_farmacia;
   String nome;
   String crf;
   String telefone;
   String genero;
   Farmaceutico({
-    required this.id_farmaceutico,
+    this.id_farmaceutico,
+    this.id_farmacia,
     required this.nome,
     required this.crf,
     required this.telefone,
@@ -16,6 +18,7 @@ class Farmaceutico {
 
   Farmaceutico copyWith({
     int? id_farmaceutico,
+    int? id_farmacia,
     String? nome,
     String? crf,
     String? telefone,
@@ -23,6 +26,7 @@ class Farmaceutico {
   }) {
     return Farmaceutico(
       id_farmaceutico: id_farmaceutico ?? this.id_farmaceutico,
+      id_farmacia: id_farmacia ?? this.id_farmacia,
       nome: nome ?? this.nome,
       crf: crf ?? this.crf,
       telefone: telefone ?? this.telefone,
@@ -33,6 +37,7 @@ class Farmaceutico {
   Map<String, dynamic> toMap() {
     return {
       'id_farmaceutico': id_farmaceutico,
+      'id_farmacia': id_farmacia,
       'nome': nome,
       'crf': crf,
       'telefone': telefone,
@@ -42,7 +47,9 @@ class Farmaceutico {
 
   factory Farmaceutico.fromMap(Map<String, dynamic> map) {
     return Farmaceutico(
-      id_farmaceutico: map['id_farmaceutico'],
+      id_farmaceutico:
+          map['id_farmaceutico'] != null ? map['id_farmaceutico'] : null,
+      id_farmacia: map['id_farmacia'] != null ? map['id_farmacia'] : null,
       nome: map['nome'],
       crf: map['crf'],
       telefone: map['telefone'],
@@ -57,7 +64,7 @@ class Farmaceutico {
 
   @override
   String toString() {
-    return 'Farmaceutico(id_farmaceutico: $id_farmaceutico, nome: $nome, crf: $crf, telefone: $telefone, genero: $genero)';
+    return 'Farmaceutico(id_farmaceutico: $id_farmaceutico, id_farmacia: $id_farmacia, nome: $nome, crf: $crf, telefone: $telefone, genero: $genero)';
   }
 
   @override
@@ -66,6 +73,7 @@ class Farmaceutico {
 
     return other is Farmaceutico &&
         other.id_farmaceutico == id_farmaceutico &&
+        other.id_farmacia == id_farmacia &&
         other.nome == nome &&
         other.crf == crf &&
         other.telefone == telefone &&
@@ -75,6 +83,7 @@ class Farmaceutico {
   @override
   int get hashCode {
     return id_farmaceutico.hashCode ^
+        id_farmacia.hashCode ^
         nome.hashCode ^
         crf.hashCode ^
         telefone.hashCode ^

@@ -45,16 +45,16 @@ class listaFarmaciaState extends GetView<ListaController> {
                 itemBuilder: (context, index) {
                   Farmacia farm = list[index];
                   return Card(
-                    color: farm.aberto
+                    color: farm.aberto == true
                         ? Color.fromARGB(255, 240, 254, 254)
                         : Color.fromARGB(255, 240, 243, 255),
-                    shadowColor: farm.aberto
+                    shadowColor: farm.aberto == true
                         ? Color.fromARGB(255, 49, 175, 180)
                         : Colors.red,
                     elevation: 5,
                     child: InkWell(
                       onTap: () {
-                        farm.aberto
+                        farm.aberto == true
                             ? Get.toNamed(Routes.listaProdutos,
                                 arguments: farm.toMap())
                             : null;
@@ -108,15 +108,10 @@ class listaFarmaciaState extends GetView<ListaController> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(
-                                      Icons.star_rounded,
-                                      color: Colors.amber,
-                                      size: 15,
-                                    ),
                                     Text(
-                                      farm.nota,
+                                      '${farm.tempo} min',
                                       style: TextStyle(
-                                        color: Colors.amber,
+                                        color: Colors.grey,
                                         fontSize: 15,
                                       ),
                                     ),
@@ -145,12 +140,15 @@ class listaFarmaciaState extends GetView<ListaController> {
                                       style: TextStyle(
                                           fontSize: 20, color: Colors.grey),
                                     ),
-                                    Text(farm.aberto ? 'ABERTO' : 'FECHADO',
+                                    Text(
+                                        farm.aberto == true
+                                            ? 'ABERTO'
+                                            : 'FECHADO',
                                         style: TextStyle(
                                             fontSize: 15,
-                                            color: farm.aberto
-                                                ? Colors.greenAccent
-                                                : Colors.redAccent))
+                                            color: farm.aberto!
+                                                ? Colors.lightGreen
+                                                : Colors.red))
                                   ],
                                 )
                               ],
@@ -223,7 +221,11 @@ class listaFarmaciaState extends GetView<ListaController> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed(Routes.formUsuario,
+                                  arguments: controller.id);
+                              controller.onInit();
+                            },
                             style: ButtonStyle(
                               enableFeedback: false,
                               overlayColor: MaterialStateProperty.all<Color>(

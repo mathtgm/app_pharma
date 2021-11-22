@@ -123,7 +123,12 @@ class LoginPage extends GetView<LoginController> {
                       height: 50,
                       width: 300,
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (Get.arguments == null)
+                            Get.toNamed(Routes.formUsuario);
+                          else
+                            Get.toNamed(Routes.formFarmacia);
+                        },
                         style: OutlinedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),

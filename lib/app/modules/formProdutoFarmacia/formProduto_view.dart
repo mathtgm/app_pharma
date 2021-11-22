@@ -34,6 +34,7 @@ class FormProdutoFarmacia extends GetView<FormProdutoFarmaciaController> {
         padding: EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Form(
+            key: controller.formkey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -122,8 +123,10 @@ class FormProdutoFarmacia extends GetView<FormProdutoFarmaciaController> {
                               backgroundColor:
                                   Color.fromARGB(255, 49, 175, 180)),
                           onPressed: () {
-                            controller.alterarProduto();
-                            Get.back();
+                            if (controller.formkey.currentState!.validate()) {
+                              controller.alterarProduto();
+                              Get.back();
+                            }
                           },
                         ),
                       ),
@@ -162,8 +165,10 @@ class FormProdutoFarmacia extends GetView<FormProdutoFarmaciaController> {
                               borderRadius: BorderRadius.zero),
                           backgroundColor: Color.fromARGB(255, 49, 175, 180)),
                       onPressed: () async {
-                        await controller.cadastraProduto();
-                        Get.back();
+                        if (controller.formkey.currentState!.validate()) {
+                          await controller.cadastraProduto();
+                          Get.back();
+                        }
                       },
                     ),
                   ),

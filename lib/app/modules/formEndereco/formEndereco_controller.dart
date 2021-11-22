@@ -39,14 +39,14 @@ class FormEnderecoController extends GetxController with StateMixin {
         long: 1.11));
   }
 
-  cadastrarEndereco() {
+  cadastrarEndereco(List pos) async {
     Endereco end = Endereco(
         endereco: endereco.text,
         numero: numero.text,
         bairro: bairro.text,
         complemento: complemento.text,
-        lat: 1.11,
-        long: 1.11);
+        lat: pos[0],
+        long: pos[1]);
     rep.setEndereco(end);
   }
 
