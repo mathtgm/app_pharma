@@ -36,75 +36,80 @@ class ListaFarmaceuticoFarmacia extends GetView<FarmaceuticoController> {
         backgroundColor: Colors.white,
       ),
       body: controller.obx(
-          (list) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 500,
-                    child: ListView.builder(
-                      itemCount: list.length,
-                      itemBuilder: (context, index) {
-                        Farmaceutico farmaceutico = list[index];
-                        return Container(
-                          margin: EdgeInsets.all(5),
+        (list) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 500,
+              child: ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  Farmaceutico farmaceutico = list[index];
+                  return Container(
+                    margin: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        border:
+                            Border(bottom: BorderSide(color: Colors.black12))),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 10, right: 10),
                           decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(color: Colors.black12))),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(top: 10, right: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100)),
-                                width: 100,
-                                height: 100,
-                                child: Image.asset(farmaceutico.genero == 'M'
-                                    ? 'assets/pMale.png'
-                                    : 'assets/pFemale.png'),
+                              borderRadius: BorderRadius.circular(100)),
+                          width: 100,
+                          height: 100,
+                          child: Image.asset(farmaceutico.genero == 'M'
+                              ? 'assets/pMale.png'
+                              : 'assets/pFemale.png'),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              farmaceutico.nome,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 49, 175, 180),
+                                fontSize: 20,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    farmaceutico.nome,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 49, 175, 180),
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  Text(
-                                    'CRF ' + farmaceutico.crf,
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Telefone ' + farmaceutico.telefone,
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  controller.tipoUsuario == 1
-                                      ? botaoEditar(farmaceutico)
-                                      : botaoLigacao(farmaceutico.telefone),
-                                ],
-                              )
-                            ],
-                          ),
-                        );
-                      },
+                            ),
+                            Text(
+                              'CRF ' + farmaceutico.crf,
+                              style: TextStyle(
+                                color: Colors.black45,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              'Telefone ' + farmaceutico.telefone,
+                              style: TextStyle(
+                                color: Colors.black45,
+                                fontSize: 16,
+                              ),
+                            ),
+                            controller.tipoUsuario == 1
+                                ? botaoEditar(farmaceutico)
+                                : botaoLigacao(farmaceutico.telefone),
+                          ],
+                        )
+                      ],
                     ),
-                  ),
-                  botaoCadastrar(),
-                ],
+                  );
+                },
               ),
-          onError: (err) => Text(err!),
-          onEmpty: msgErro().telaErro(
-              'A farmacia não tem farmaceutico cadastrado',
-              ImagensTela.imgErroConexao)),
+            ),
+            botaoCadastrar(),
+          ],
+        ),
+        onError: (err) => Text(err!),
+        onEmpty: Column(
+          children: [
+            msgErro().telaErro('A farmacia não tem farmaceutico cadastrado',
+                ImagensTela.imgErroConexao),
+            botaoCadastrar()
+          ],
+        ),
+      ),
     );
   }
 
